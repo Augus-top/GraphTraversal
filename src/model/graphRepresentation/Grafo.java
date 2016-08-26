@@ -51,11 +51,32 @@ public class Grafo {
         return this.algoritmoBuscaCaminho.buscarCaminho(idVerticeA, idVerticeB);
     }
     
+    public boolean verificarTodosVerticesVisitados(){
+        for (Vertice arrayVertice1 : arrayVertice) {
+            if(!arrayVertice1.isVisitado()){
+                return false;
+            }
+        }
+        return true;
+    }
+    
     public void limparCaminho(){
         for (Vertice arrayVertice1 : arrayVertice) {
             arrayVertice1.setVisitado(false);
             arrayVertice1.setVerticePai(null);
+            arrayVertice1.setCustoCaminho(-1);
         }
+    }
+    
+    public boolean verificarPesosNegativos(){
+        for (double[] i : this.matrizAdjacencia) {
+            for (double j : i) {
+                if(j < 0){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     
     public int getIdVerticePeloRotulo(String rotulo){
@@ -81,7 +102,7 @@ public class Grafo {
         return verticeVizinho;
     }
     
-        public ArrayList<Vertice> getVizinhosVertice(Vertice vertice){
+    public ArrayList<Vertice> getVizinhosVertice(Vertice vertice){
         ArrayList<Vertice> verticeVizinho = new ArrayList<>();
         for (int i = 0; i < this.getNumeroVertices(); i++) {
             if(this.matrizAdjacencia[vertice.getId()][i] > 0){

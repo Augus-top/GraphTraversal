@@ -36,15 +36,19 @@ public class DijkstraSearch extends AlgoritmoBuscaCaminho{
                 if(vizinho.getCustoCaminho() == -1){
                     vizinho.setCustoCaminho(verticeAtual.getCustoCaminho() + this.grafo.getPeso(verticeAtual.getId(), vizinho.getId()));
                     vizinho.setVerticePai(verticeAtual);
-                }else if(vizinho.getCustoCaminho() > verticeAtual.getCustoCaminho() + vizinho.getCustoCaminho()){
+                    this.listaAberta.add(vizinho);
+                }else if(vizinho.getCustoCaminho() > verticeAtual.getCustoCaminho() + this.grafo.getPeso(verticeAtual.getId(), vizinho.getId())){
                     vizinho.setCustoCaminho(verticeAtual.getCustoCaminho() + this.grafo.getPeso(verticeAtual.getId(), vizinho.getId()));
                     vizinho.setVerticePai(verticeAtual);
-                }
-                if(vizinho.getId() == idVerticeB){
-                    this.definirCaminho(vizinho);
-                    return this.caminhoGrafo;
+                    this.listaAberta.add(vizinho);
                 }
             }
+            if(this.grafo.verificarTodosVerticesVisitados()){
+                break;
+            }
+        }
+        if(this.grafo.getVertice(idVerticeB).getVerticePai() != null){
+            this.definirCaminho(this.grafo.getVertice(idVerticeB));
         }
         return this.caminhoGrafo;
     }

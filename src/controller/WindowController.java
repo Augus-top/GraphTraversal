@@ -92,6 +92,10 @@ public class WindowController {
             this.mainWindow.getjTextArea1().append("Caminho BFS\n");
             this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.BFS);
         }else if(this.mainWindow.getRadioButtonDijkstra().isSelected()){
+            if(this.grafoAtual.verificarPesosNegativos()){
+                JOptionPane.showMessageDialog(mainWindow, "Pesos negativos não são permitidos no Dijkstra");
+                return;
+            }
             this.mainWindow.getjTextArea1().append("Caminho DIJKSTRA\n");
             this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.DIJKSTRA);
         }else{
