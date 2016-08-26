@@ -60,6 +60,7 @@ public class WindowController {
         }
         this.mainWindow.getComboBoxVerticeInicial().setModel(model);
         this.mainWindow.getComboBoxVerticeFinal().setModel(model2);
+        this.mainWindow.getComboBoxVerticeFinal().setSelectedIndex(1);
     }
     
     private void limparRotulosVertices(){
@@ -91,9 +92,8 @@ public class WindowController {
             this.mainWindow.getjTextArea1().append("Caminho BFS\n");
             this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.BFS);
         }else if(this.mainWindow.getRadioButtonDijkstra().isSelected()){
-            this.mainWindow.getjTextArea1().append("Caminho DIJKSTRA ainda não suportado\n");
+            this.mainWindow.getjTextArea1().append("Caminho DIJKSTRA\n");
             this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.DIJKSTRA);
-            return;
         }else{
             return;
         }
@@ -104,6 +104,9 @@ public class WindowController {
         }else{
             for (Vertice caminho1 : caminho) {
                 this.mainWindow.getjTextArea1().append(caminho1.getRotulo() + "\n");
+            }
+            if(this.mainWindow.getRadioButtonDijkstra().isSelected()){
+                this.mainWindow.getjTextArea1().append("Custo do Caminho: " + caminho.get(caminho.size() - 1).getCustoCaminho() + "\n");
             }
             this.mainWindow.getjTextArea1().append("\n");
         }

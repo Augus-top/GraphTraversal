@@ -16,6 +16,7 @@ public class Vertice {
     private String rotulo;
     private boolean visitado = false; 
     private Vertice verticePai = null;
+    private double custoCaminho = -1;
     
     public Vertice(int posx, int posy, int id, String rotulo) {
         this.posx = posx;
@@ -44,6 +45,10 @@ public class Vertice {
         return verticePai;
     }
 
+    public double getCustoCaminho() {
+        return custoCaminho;
+    }
+    
     public boolean isVisitado() {
         return visitado;
     }
@@ -59,4 +64,10 @@ public class Vertice {
     public void setRotulo(String rotulo) {
         this.rotulo = rotulo;
     }
+
+    public void setCustoCaminho(double custoCaminho) {
+        this.custoCaminho = custoCaminho;
+    }
+    
+    
 }

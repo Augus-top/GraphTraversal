@@ -6,6 +6,8 @@
 package model.graphAlgorithm;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import model.graphRepresentation.Grafo;
 import model.graphRepresentation.Vertice;
 
@@ -14,14 +16,37 @@ import model.graphRepresentation.Vertice;
  * @author Augustop
  */
 public class DijkstraSearch extends AlgoritmoBuscaCaminho{
-
+    private Queue<Vertice> listaAberta;
+    
     public DijkstraSearch(Grafo grafo) {
         super(grafo);
     }
     
     @Override
     public ArrayList<Vertice> buscarCaminho(int idVerticeA, int idVerticeB) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.caminhoGrafo = null;
+        this.listaAberta = new PriorityQueue(new ComparadorVerticesCusto());
+        this.listaAberta.add(this.grafo.getVertice(idVerticeA));
+        this.listaAberta.peek().setCustoCaminho(0);
+        while(!listaAberta.isEmpty()){
+            Vertice verticeAtual = this.listaAberta.poll();
+            verticeAtual.setVisitado(true);
+            ArrayList<Vertice> vizinhos = this.grafo.getVizinhosVertice(verticeAtual);
+            for (Vertice vizinho : vizinhos) {
+                if(vizinho.getCustoCaminho() == -1){
+                    vizinho.setCustoCaminho(verticeAtual.getCustoCaminho() + this.grafo.getPeso(verticeAtual.getId(), vizinho.getId()));
+                    vizinho.setVerticePai(verticeAtual);
+                }else if(vizinho.getCustoCaminho() > verticeAtual.getCustoCaminho() + vizinho.getCustoCaminho()){
+                    vizinho.setCustoCaminho(verticeAtual.getCustoCaminho() + this.grafo.getPeso(verticeAtual.getId(), vizinho.getId()));
+                    vizinho.setVerticePai(verticeAtual);
+                }
+                if(vizinho.getId() == idVerticeB){
+                    this.definirCaminho(vizinho);
+                    return this.caminhoGrafo;
+                }
+            }
+        }
+        return this.caminhoGrafo;
     }
     
 }

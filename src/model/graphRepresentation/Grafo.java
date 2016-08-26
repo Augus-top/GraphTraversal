@@ -67,6 +67,10 @@ public class Grafo {
         return -1;
     }
     
+    public double getPeso(int idVerticeA, int idVerticeB){
+        return this.matrizAdjacencia[idVerticeA][idVerticeB];
+    }
+    
     public ArrayList<Vertice> getVizinhosNaoVisitadosVertice(Vertice vertice){
         ArrayList<Vertice> verticeVizinho = new ArrayList<>();
         for (int i = 0; i < this.getNumeroVertices(); i++) {
