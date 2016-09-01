@@ -48,7 +48,6 @@ public class WindowController {
         }catch(Exception e){
             Logger.getLogger(WindowController.class.getName()).log(Level.SEVERE, null, e);
         }
-//        this.mainWindow.getjTextArea1().setText("");
         this.limparRotulosVertices();
         this.prepararComboBox();
         this.graphController = new GraphController(grafoAtual, mainWindow.getGraphPanel());
@@ -95,17 +94,14 @@ public class WindowController {
             return;
         }
         if(this.mainWindow.getRadioButtonDFS().isSelected()){
-//            this.mainWindow.getjTextArea1().append("Caminho DFS\n");
             this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.DFS);
         }else if(this.mainWindow.getRadioButtonBFS().isSelected()){
-//            this.mainWindow.getjTextArea1().append("Caminho BFS\n");
             this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.BFS);
         }else if(this.mainWindow.getRadioButtonDijkstra().isSelected()){
             if(this.grafoAtual.verificarPesosNegativos()){
                 JOptionPane.showMessageDialog(mainWindow, "Pesos negativos não são permitidos no Dijkstra");
                 return;
             }
-//            this.mainWindow.getjTextArea1().append("Caminho DIJKSTRA\n");
             this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.DIJKSTRA);
         }else{
             return;
@@ -115,9 +111,7 @@ public class WindowController {
         if(caminho == null){
 //            this.mainWindow.getjTextArea1().append("Caminho Não Existe\n\n\n");
         }else{
-            for (Vertice caminho1 : caminho) {
-//                this.mainWindow.getjTextArea1().append(caminho1.getRotulo() + "\n");
-            }
+            this.graphController.desenharGrafo();
             if(this.mainWindow.getRadioButtonDijkstra().isSelected()){
 //                this.mainWindow.getjTextArea1().append("Custo do Caminho: " + caminho.get(caminho.size() - 1).getCustoCaminho() + "\n");
             }

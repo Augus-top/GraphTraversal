@@ -46,4 +46,8 @@ public abstract class AlgoritmoBuscaCaminho {
         }while(verticeAtual != null);
         return this.caminhoGrafo;
     }
+
+    public ArrayList<Vertice> getCaminhoGrafo() {
+        return caminhoGrafo;
+    }
 }

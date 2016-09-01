@@ -129,6 +129,13 @@ public class Grafo {
         return this.arrayVertice.size();
     }
     
+    public ArrayList<Vertice> getCaminho(){
+        if(this.algoritmoBuscaCaminho == null){
+            return null;
+        }
+        return this.algoritmoBuscaCaminho.getCaminhoGrafo();
+    }
+    
     public Vertice getVertice(int idVertice){
         return this.arrayVertice.get(idVertice);
     }
@@ -160,4 +167,6 @@ public class Grafo {
             break;
         }
     }
+    
+    
 }
