@@ -5,6 +5,7 @@
  */
 package model.graphRepresentation;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import model.graphAlgorithm.AlgoritmoBuscaCaminho;
 import model.graphAlgorithm.BreadthFirstSearch;
@@ -34,8 +35,8 @@ public class Grafo {
         matrizAdjacencia = new double[numeroVertice][numeroVertice];
     }
     
-    public void addVertice(int posx, int posY, int id, String rotulo){
-        Vertice novoVertice = new Vertice(posx, posY, id, rotulo);
+    public void addVertice(Point point, int id, String rotulo){
+        Vertice novoVertice = new Vertice(point, id, rotulo);
         this.arrayVertice.add(novoVertice);
     }
     
@@ -132,6 +133,10 @@ public class Grafo {
         return this.arrayVertice.get(idVertice);
     }
 
+    public double[][] getMatrizAdjacencia() {
+        return matrizAdjacencia;
+    }
+    
     public boolean isConexo() {
         return conexo;
     }

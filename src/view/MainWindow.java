@@ -7,10 +7,17 @@ package view;
 
 import com.alee.laf.WebLookAndFeel;
 import controller.WindowController;
+import java.awt.BorderLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -51,8 +58,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         radioButtonAlgorithmGroup = new javax.swing.ButtonGroup();
         buttonXML = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         buttonBuscarCaminho = new javax.swing.JButton();
         labelVerticeInicial = new javax.swing.JLabel();
         comboBoxVerticeInicial = new javax.swing.JComboBox();
@@ -62,6 +67,7 @@ public class MainWindow extends javax.swing.JFrame {
         radioButtonDFS = new javax.swing.JRadioButton();
         radioButtonDijkstra = new javax.swing.JRadioButton();
         radioButtonBFS = new javax.swing.JRadioButton();
+        graphPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Caminho em Grafos");
@@ -73,11 +79,6 @@ public class MainWindow extends javax.swing.JFrame {
                 buttonXMLActionPerformed(evt);
             }
         });
-
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
 
         buttonBuscarCaminho.setText("Buscar Caminho");
         buttonBuscarCaminho.addActionListener(new java.awt.event.ActionListener() {
@@ -117,11 +118,15 @@ public class MainWindow extends javax.swing.JFrame {
         radioButtonBFS.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         radioButtonBFS.setText("BFS");
 
+        graphPanel.setBackground(new java.awt.Color(255, 255, 255));
+        graphPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        graphPanel.setPreferredSize(new java.awt.Dimension(600, 450));
+        graphPanel.setLayout(new java.awt.BorderLayout());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(buttonXML, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -145,24 +150,15 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(radioButtonDFS))
                         .addContainerGap())
                     .addComponent(buttonBuscarCaminho, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(graphPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(graphPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelVerticeInicial)
-                            .addComponent(comboBoxVerticeInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelVerticeFinal)
-                            .addComponent(comboBoxVerticeFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(11, 11, 11))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                        .addGap(17, 17, 17)
                         .addComponent(radioButtonDFS)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -170,7 +166,17 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(labelAlgoritmo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(radioButtonDijkstra)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelVerticeInicial)
+                            .addComponent(comboBoxVerticeInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelVerticeFinal)
+                            .addComponent(comboBoxVerticeFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonXML, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonBuscarCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -235,8 +241,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton buttonXML;
     private javax.swing.JComboBox comboBoxVerticeFinal;
     private javax.swing.JComboBox comboBoxVerticeInicial;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JPanel graphPanel;
     private javax.swing.JLabel labelAlgoritmo;
     private javax.swing.JLabel labelVerticeFinal;
     private javax.swing.JLabel labelVerticeInicial;
@@ -246,9 +251,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioButtonDijkstra;
     // End of variables declaration//GEN-END:variables
 
-    public JTextArea getjTextArea1() {
-        return jTextArea1;
-    }
 
     public ButtonGroup getRadioButtonAlgorithmGroup() {
         return radioButtonAlgorithmGroup;
@@ -273,6 +275,8 @@ public class MainWindow extends javax.swing.JFrame {
     public JRadioButton getRadioButtonDijkstra() {
         return radioButtonDijkstra;
     }
-    
-    
+
+    public JPanel getGraphPanel() {
+        return graphPanel;
+    }
 }

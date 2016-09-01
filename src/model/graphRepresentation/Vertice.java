@@ -5,22 +5,22 @@
  */
 package model.graphRepresentation;
 
+import java.awt.Point;
+
 /**
  *
  * @author Augustop
  */
 public class Vertice {
-    private int posx;
-    private int posy;
+    private Point posicao;
     private int id;
     private String rotulo;
     private boolean visitado = false; 
     private Vertice verticePai = null;
     private double custoCaminho = -1;
     
-    public Vertice(int posx, int posy, int id, String rotulo) {
-        this.posx = posx;
-        this.posy = posy;
+    public Vertice(Point point, int id, String rotulo) {
+        this.posicao = point;
         this.id = id;
         this.rotulo = rotulo;
     }
@@ -29,14 +29,10 @@ public class Vertice {
         return id;
     }
 
-    public int getPosx() {
-        return posx;
+    public Point getPosicao() {
+        return posicao;
     }
-
-    public int getPosy() {
-        return posy;
-    }
-
+    
     public String getRotulo() {
         return rotulo;
     }
@@ -51,6 +47,10 @@ public class Vertice {
     
     public boolean isVisitado() {
         return visitado;
+    }
+
+    public void setPosicao(Point posicao) {
+        this.posicao = posicao;
     }
     
     public void setVisitado(boolean visitado) {

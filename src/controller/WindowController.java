@@ -27,11 +27,13 @@ public class WindowController {
     private MainWindow mainWindow;
     private XMLController xmlController = new XMLController();
     private Grafo grafoAtual;
+    private GraphController graphController;
     
     public WindowController() {
         this.mainWindow = new MainWindow(this);
         this.mainWindow.setLocationRelativeTo(null);
         this.mainWindow.setVisible(true);
+        this.mainWindow.requestFocusInWindow();
     }
     
     public void iniciarImportacaoXML(){
@@ -46,8 +48,15 @@ public class WindowController {
         }catch(Exception e){
             Logger.getLogger(WindowController.class.getName()).log(Level.SEVERE, null, e);
         }
-        this.mainWindow.getjTextArea1().setText("");
+//        this.mainWindow.getjTextArea1().setText("");
         this.limparRotulosVertices();
+        this.prepararComboBox();
+        this.graphController = new GraphController(grafoAtual, mainWindow.getGraphPanel());
+        this.graphController.desenharGrafo();
+        this.mainWindow.repaint();
+    }
+    
+    private void prepararComboBox(){
         PriorityQueue<Vertice> pq = new PriorityQueue<Vertice>(new ComparadorVerticesRotulo());
         for (Vertice v : this.grafoAtual.getArrayVertice()) {
             pq.add(v);
@@ -86,17 +95,17 @@ public class WindowController {
             return;
         }
         if(this.mainWindow.getRadioButtonDFS().isSelected()){
-            this.mainWindow.getjTextArea1().append("Caminho DFS\n");
+//            this.mainWindow.getjTextArea1().append("Caminho DFS\n");
             this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.DFS);
         }else if(this.mainWindow.getRadioButtonBFS().isSelected()){
-            this.mainWindow.getjTextArea1().append("Caminho BFS\n");
+//            this.mainWindow.getjTextArea1().append("Caminho BFS\n");
             this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.BFS);
         }else if(this.mainWindow.getRadioButtonDijkstra().isSelected()){
             if(this.grafoAtual.verificarPesosNegativos()){
                 JOptionPane.showMessageDialog(mainWindow, "Pesos negativos não são permitidos no Dijkstra");
                 return;
             }
-            this.mainWindow.getjTextArea1().append("Caminho DIJKSTRA\n");
+//            this.mainWindow.getjTextArea1().append("Caminho DIJKSTRA\n");
             this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.DIJKSTRA);
         }else{
             return;
@@ -104,15 +113,15 @@ public class WindowController {
 
         ArrayList<Vertice> caminho = this.grafoAtual.realizarBusca(this.grafoAtual.getIdVerticePeloRotulo(rotuloA), this.grafoAtual.getIdVerticePeloRotulo(rotuloB));
         if(caminho == null){
-            this.mainWindow.getjTextArea1().append("Caminho Não Existe\n\n\n");
+//            this.mainWindow.getjTextArea1().append("Caminho Não Existe\n\n\n");
         }else{
             for (Vertice caminho1 : caminho) {
-                this.mainWindow.getjTextArea1().append(caminho1.getRotulo() + "\n");
+//                this.mainWindow.getjTextArea1().append(caminho1.getRotulo() + "\n");
             }
             if(this.mainWindow.getRadioButtonDijkstra().isSelected()){
-                this.mainWindow.getjTextArea1().append("Custo do Caminho: " + caminho.get(caminho.size() - 1).getCustoCaminho() + "\n");
+//                this.mainWindow.getjTextArea1().append("Custo do Caminho: " + caminho.get(caminho.size() - 1).getCustoCaminho() + "\n");
             }
-            this.mainWindow.getjTextArea1().append("\n");
+//            this.mainWindow.getjTextArea1().append("\n");
         }
 
         this.grafoAtual.limparCaminho();

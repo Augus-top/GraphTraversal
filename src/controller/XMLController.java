@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.awt.Point;
 import model.graphRepresentation.Grafo;
 import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
@@ -43,7 +44,7 @@ public class XMLController {
                     String rotulo = element.getAttribute("rotulo");
                     int posX = Integer.parseInt(element.getAttribute("posX"));
                     int posY = Integer.parseInt(element.getAttribute("posY"));
-                    grafo.addVertice(posX, posY, relId, rotulo.toUpperCase());
+                    grafo.addVertice(new Point(posX, posY), relId, rotulo.toUpperCase());
                 }
             }
             nodes = doc.getElementsByTagName("Aresta");
