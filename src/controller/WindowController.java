@@ -44,13 +44,17 @@ public class WindowController {
             fileChooser.setFileFilter(extensionFilter);
             if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
                 this.grafoAtual = this.xmlController.lerGrafo(fileChooser.getSelectedFile());
+                this.limparVertices();
                 JFileChooserController.storeLastDirectory(fileChooser);
             }
         }catch(Exception e){
-            Logger.getLogger(WindowController.class.getName()).log(Level.SEVERE, null, e);
+            this.grafoAtual = null;
+            this.mainWindow.getGraphPanel().removeAll();
+            this.mainWindow.repaint();
+            JOptionPane.showMessageDialog(this.mainWindow, "Erro no XML");
+            return;
         }
         this.mainWindow.getTextAreaPath().setText("");
-        this.limparRotulosVertices();
         this.prepararComboBox();
         this.graphController = new GraphController(grafoAtual, mainWindow.getGraphPanel());
         this.graphController.desenharGrafo();
@@ -73,13 +77,22 @@ public class WindowController {
         this.mainWindow.getComboBoxVerticeFinal().setSelectedIndex(1);
     }
     
-    private void limparRotulosVertices(){
+    private void limparVertices() throws Exception{
         for (int i = 0; i < this.grafoAtual.getArrayVertice().size(); i++) {
+            if(this.grafoAtual.getVertice(i).getId() != i){
+                throw new Exception();
+            }
             for (int j = i + 1; j < this.grafoAtual.getArrayVertice().size(); j++) {
                 if(this.grafoAtual.getVertice(i).getRotulo().equals(this.grafoAtual.getVertice(j).getRotulo())){
                     this.grafoAtual.getVertice(i).setRotulo(this.grafoAtual.getVertice(i).getRotulo() + "1");
                     i--;
                     break;
+                }
+                if(this.grafoAtual.getVertice(i).getId() == this.grafoAtual.getVertice(j).getId()){
+                    throw new Exception();
+                }
+                if(this.grafoAtual.getPeso(i, j) < 0){
+                    throw new Exception();
                 }
             }
         }
@@ -112,6 +125,7 @@ public class WindowController {
         ArrayList<Vertice> caminho = this.grafoAtual.realizarBusca(this.grafoAtual.getIdVerticePeloRotulo(rotuloA), this.grafoAtual.getIdVerticePeloRotulo(rotuloB));
         if(caminho == null){
             this.mainWindow.getTextAreaPath().append("Caminho Não Existe\n");
+            this.graphController.desenharGrafo();
         }else{
             for (Vertice caminho1 : caminho) {
                 this.mainWindow.getTextAreaPath().append(caminho1.getRotulo());
