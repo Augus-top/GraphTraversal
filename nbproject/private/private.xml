@@ -14,6 +14,7 @@
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/AlgoritmoBuscaCaminho.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphRepresentation/Vertice.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphRepresentation/Grafo.java</file>
+            <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/ComparadorVerticesCusto.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/controller/XMLController.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/DijkstraSearch.java</file>
         </group>
