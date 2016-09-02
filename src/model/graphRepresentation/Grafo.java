@@ -22,7 +22,7 @@ import model.graphAlgorithm.DijkstraSearch;
 public class Grafo {
     private boolean ponderado;
     private boolean dirigido;
-    private boolean conexo;
+    private boolean conexo = false;
     private ArrayList<Vertice> arrayVertice = new ArrayList<>();
     private double matrizAdjacencia[][];
     private AlgoritmoBuscaCaminho algoritmoBuscaCaminho;
@@ -69,15 +69,18 @@ public class Grafo {
         }
     }
     
-    public boolean verificarPesosNegativos(){
-        for (double[] i : this.matrizAdjacencia) {
-            for (double j : i) {
-                if(j < 0){
-                    return true;
+    public boolean verificarGrafoConexo(){
+        this.algoritmoBuscaCaminho = new BreadthFirstSearch(this);
+        for (int i = 0; i < this.arrayVertice.size(); i++) {
+            for (int j = i + 1; j < this.arrayVertice.size(); j++) {
+                this.limparCaminho();
+                if(this.algoritmoBuscaCaminho.buscarCaminho(i, j) == null){
+                    return this.conexo;
                 }
             }
         }
-        return false;
+        this.conexo = true;
+        return this.conexo;
     }
     
     public int getIdVerticePeloRotulo(String rotulo){

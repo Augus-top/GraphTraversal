@@ -1,0 +1,225 @@
+<elementosGrafo.Grafo>
+  <counterId>29</counterId>
+  <listaVertices>
+    <elementosGrafo.Vertice>
+      <id>0</id>
+      <rotulo>A</rotulo>
+      <posicao>
+        <x>270</x>
+        <y>112</y>
+      </posicao>
+      <tamanho>35</tamanho>
+      <arestas>
+        <elementosGrafo.Aresta>
+          <x1>270.0</x1>
+          <y1>112.0</y1>
+          <x2>452.0</x2>
+          <y2>124.0</y2>
+          <verticeOrigem reference="../../.."/>
+          <verticeDestino>
+            <id>1</id>
+            <rotulo>B</rotulo>
+            <posicao>
+              <x>452</x>
+              <y>124</y>
+            </posicao>
+            <tamanho>35</tamanho>
+            <arestas>
+              <elementosGrafo.Aresta>
+                <x1>452.0</x1>
+                <y1>124.0</y1>
+                <x2>634.0</x2>
+                <y2>63.0</y2>
+                <verticeOrigem reference="../../.."/>
+                <verticeDestino>
+                  <id>6</id>
+                  <rotulo>G</rotulo>
+                  <posicao>
+                    <x>634</x>
+                    <y>63</y>
+                  </posicao>
+                  <tamanho>35</tamanho>
+                  <arestas/>
+                  <zIndex>0.0</zIndex>
+                </verticeDestino>
+                <peso>3.0</peso>
+                <dirigida>true</dirigida>
+              </elementosGrafo.Aresta>
+              <elementosGrafo.Aresta>
+                <x1>452.0</x1>
+                <y1>124.0</y1>
+                <x2>647.0</x2>
+                <y2>307.0</y2>
+                <verticeOrigem reference="../../.."/>
+                <verticeDestino>
+                  <id>3</id>
+                  <rotulo>D</rotulo>
+                  <posicao>
+                    <x>647</x>
+                    <y>307</y>
+                  </posicao>
+                  <tamanho>35</tamanho>
+                  <arestas>
+                    <elementosGrafo.Aresta>
+                      <x1>647.0</x1>
+                      <y1>307.0</y1>
+                      <x2>772.0</x2>
+                      <y2>142.0</y2>
+                      <verticeOrigem reference="../../.."/>
+                      <verticeDestino>
+                        <id>4</id>
+                        <rotulo>E</rotulo>
+                        <posicao>
+                          <x>772</x>
+                          <y>142</y>
+                        </posicao>
+                        <tamanho>35</tamanho>
+                        <arestas>
+                          <elementosGrafo.Aresta>
+                            <x1>772.0</x1>
+                            <y1>142.0</y1>
+                            <x2>634.0</x2>
+                            <y2>63.0</y2>
+                            <verticeOrigem reference="../../.."/>
+                            <verticeDestino reference="../../../../../../../../elementosGrafo.Aresta/verticeDestino"/>
+                            <peso>3.0</peso>
+                            <dirigida>true</dirigida>
+                          </elementosGrafo.Aresta>
+                        </arestas>
+                        <zIndex>0.0</zIndex>
+                      </verticeDestino>
+                      <peso>5.0</peso>
+                      <dirigida>true</dirigida>
+                    </elementosGrafo.Aresta>
+                    <elementosGrafo.Aresta>
+                      <x1>647.0</x1>
+                      <y1>307.0</y1>
+                      <x2>924.0</x2>
+                      <y2>314.0</y2>
+                      <verticeOrigem reference="../../.."/>
+                      <verticeDestino>
+                        <id>5</id>
+                        <rotulo>F</rotulo>
+                        <posicao>
+                          <x>924</x>
+                          <y>314</y>
+                        </posicao>
+                        <tamanho>35</tamanho>
+                        <arestas>
+                          <elementosGrafo.Aresta>
+                            <x1>924.0</x1>
+                            <y1>314.0</y1>
+                            <x2>772.0</x2>
+                            <y2>142.0</y2>
+                            <verticeOrigem reference="../../.."/>
+                            <verticeDestino reference="../../../../../elementosGrafo.Aresta/verticeDestino"/>
+                            <peso>1.0</peso>
+                            <dirigida>true</dirigida>
+                          </elementosGrafo.Aresta>
+                        </arestas>
+                        <zIndex>0.0</zIndex>
+                      </verticeDestino>
+                      <peso>1.0</peso>
+                      <dirigida>true</dirigida>
+                    </elementosGrafo.Aresta>
+                  </arestas>
+                  <zIndex>0.0</zIndex>
+                </verticeDestino>
+                <peso>1.0</peso>
+                <dirigida>true</dirigida>
+              </elementosGrafo.Aresta>
+            </arestas>
+            <zIndex>0.0</zIndex>
+          </verticeDestino>
+          <peso>2.0</peso>
+          <dirigida>true</dirigida>
+        </elementosGrafo.Aresta>
+        <elementosGrafo.Aresta>
+          <x1>270.0</x1>
+          <y1>112.0</y1>
+          <x2>272.0</x2>
+          <y2>300.0</y2>
+          <verticeOrigem reference="../../.."/>
+          <verticeDestino>
+            <id>2</id>
+            <rotulo>C</rotulo>
+            <posicao>
+              <x>272</x>
+              <y>300</y>
+            </posicao>
+            <tamanho>35</tamanho>
+            <arestas>
+              <elementosGrafo.Aresta>
+                <x1>272.0</x1>
+                <y1>300.0</y1>
+                <x2>143.0</x2>
+                <y2>352.0</y2>
+                <verticeOrigem reference="../../.."/>
+                <verticeDestino>
+                  <id>8</id>
+                  <rotulo>I</rotulo>
+                  <posicao>
+                    <x>143</x>
+                    <y>352</y>
+                  </posicao>
+                  <tamanho>35</tamanho>
+                  <arestas/>
+                  <zIndex>0.0</zIndex>
+                </verticeDestino>
+                <peso>5.0</peso>
+                <dirigida>true</dirigida>
+              </elementosGrafo.Aresta>
+            </arestas>
+            <zIndex>0.0</zIndex>
+          </verticeDestino>
+          <peso>2.0</peso>
+          <dirigida>true</dirigida>
+        </elementosGrafo.Aresta>
+        <elementosGrafo.Aresta>
+          <x1>270.0</x1>
+          <y1>112.0</y1>
+          <x2>478.0</x2>
+          <y2>365.0</y2>
+          <verticeOrigem reference="../../.."/>
+          <verticeDestino>
+            <id>7</id>
+            <rotulo>H</rotulo>
+            <posicao>
+              <x>478</x>
+              <y>365</y>
+            </posicao>
+            <tamanho>35</tamanho>
+            <arestas>
+              <elementosGrafo.Aresta>
+                <x1>478.0</x1>
+                <y1>365.0</y1>
+                <x2>143.0</x2>
+                <y2>352.0</y2>
+                <verticeOrigem reference="../../.."/>
+                <verticeDestino reference="../../../../../elementosGrafo.Aresta[2]/verticeDestino/arestas/elementosGrafo.Aresta/verticeDestino"/>
+                <peso>3.0</peso>
+                <dirigida>true</dirigida>
+              </elementosGrafo.Aresta>
+            </arestas>
+            <zIndex>0.0</zIndex>
+          </verticeDestino>
+          <peso>1.0</peso>
+          <dirigida>true</dirigida>
+        </elementosGrafo.Aresta>
+      </arestas>
+      <zIndex>0.0</zIndex>
+    </elementosGrafo.Vertice>
+    <elementosGrafo.Vertice reference="../elementosGrafo.Vertice/arestas/elementosGrafo.Aresta/verticeDestino"/>
+    <elementosGrafo.Vertice reference="../elementosGrafo.Vertice/arestas/elementosGrafo.Aresta[2]/verticeDestino"/>
+    <elementosGrafo.Vertice reference="../elementosGrafo.Vertice/arestas/elementosGrafo.Aresta/verticeDestino/arestas/elementosGrafo.Aresta[2]/verticeDestino"/>
+    <elementosGrafo.Vertice reference="../elementosGrafo.Vertice/arestas/elementosGrafo.Aresta/verticeDestino/arestas/elementosGrafo.Aresta[2]/verticeDestino/arestas/elementosGrafo.Aresta/verticeDestino"/>
+    <elementosGrafo.Vertice reference="../elementosGrafo.Vertice/arestas/elementosGrafo.Aresta/verticeDestino/arestas/elementosGrafo.Aresta[2]/verticeDestino/arestas/elementosGrafo.Aresta[2]/verticeDestino"/>
+    <elementosGrafo.Vertice reference="../elementosGrafo.Vertice/arestas/elementosGrafo.Aresta/verticeDestino/arestas/elementosGrafo.Aresta/verticeDestino"/>
+    <elementosGrafo.Vertice reference="../elementosGrafo.Vertice/arestas/elementosGrafo.Aresta[3]/verticeDestino"/>
+    <elementosGrafo.Vertice reference="../elementosGrafo.Vertice/arestas/elementosGrafo.Aresta[2]/verticeDestino/arestas/elementosGrafo.Aresta/verticeDestino"/>
+  </listaVertices>
+  <ponderado>true</ponderado>
+  <dirigido>true</dirigido>
+  <zMax>3.0</zMax>
+  <fromDesfazer>false</fromDesfazer>
+</elementosGrafo.Grafo>

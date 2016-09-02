@@ -113,10 +113,6 @@ public class WindowController {
         }else if(this.mainWindow.getRadioButtonBFS().isSelected()){
             this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.BFS);
         }else if(this.mainWindow.getRadioButtonDijkstra().isSelected()){
-            if(this.grafoAtual.verificarPesosNegativos()){
-                JOptionPane.showMessageDialog(mainWindow, "Pesos negativos não são permitidos no Dijkstra");
-                return;
-            }
             this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.DIJKSTRA);
         }else{
             return;
@@ -125,7 +121,6 @@ public class WindowController {
         ArrayList<Vertice> caminho = this.grafoAtual.realizarBusca(this.grafoAtual.getIdVerticePeloRotulo(rotuloA), this.grafoAtual.getIdVerticePeloRotulo(rotuloB));
         if(caminho == null){
             this.mainWindow.getTextAreaPath().append("Caminho Não Existe\n");
-            this.graphController.desenharGrafo();
         }else{
             for (Vertice caminho1 : caminho) {
                 this.mainWindow.getTextAreaPath().append(caminho1.getRotulo());
@@ -133,12 +128,20 @@ public class WindowController {
                     this.mainWindow.getTextAreaPath().append(" -> ");
                 }
             }
-            this.graphController.desenharGrafo();
             if(this.mainWindow.getRadioButtonDijkstra().isSelected()){
-                this.mainWindow.getTextAreaPath().append("\nCusto do Caminho: " + caminho.get(caminho.size() - 1).getCustoCaminho() + "\n");
+                this.mainWindow.getTextAreaPath().append("\nCusto do Caminho: " + caminho.get(caminho.size() - 1).getCustoCaminho());
             }
         }
-
+        this.graphController.desenharGrafo();
+        if(this.grafoAtual.isConexo()){
+            this.mainWindow.getTextAreaPath().append("\nO Grafo é conexo");
+        }else{
+            if(this.grafoAtual.verificarGrafoConexo()){
+                this.mainWindow.getTextAreaPath().append("\nO Grafo é conexo");
+            }else{
+                this.mainWindow.getTextAreaPath().append("\nO Grafo não é conexo");
+            }
+        }
         this.grafoAtual.limparCaminho();
     }
 }

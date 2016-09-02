@@ -46,9 +46,6 @@ public class BreadthFirstSearch extends AlgoritmoBuscaCaminho{
                 verticesVizinhos.remove(primeiroVizinho);
             }
         }
-        if(this.filaVertices.isEmpty() && this.caminhoGrafo == null){
-            this.grafo.setConexo(false);
-        }
         return this.caminhoGrafo;
     }
     

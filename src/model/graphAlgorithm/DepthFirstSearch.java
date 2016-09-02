@@ -43,9 +43,6 @@ public class DepthFirstSearch extends AlgoritmoBuscaCaminho{
                 this.stackVertices.push(primeiroVizinho);
             }
         }
-        if(this.stackVertices.isEmpty() && this.caminhoGrafo == null){
-            this.grafo.setConexo(false);
-        }
         return this.caminhoGrafo;
     }
     
