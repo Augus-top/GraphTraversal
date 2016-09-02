@@ -71,13 +71,16 @@ public class GraphController {
             }
         }
         if(this.grafo.getCaminho() != null && this.grafo.getCaminho().size() > 1){
-            g.setColor(Color.red);
             for (int i = 0; i < this.grafo.getCaminho().size() - 1; i++) {
+                g.setColor(Color.red);
                 v1 = this.grafo.getCaminho().get(i).getPosicao();
                 v2 = this.grafo.getCaminho().get(i + 1).getPosicao();
                 g.drawLine(v1.x, v1.y, v2.x, v2.y);
                 if(this.grafo.isDirigido()){
                     this.pintarArcos(g, v2, v1);
+                }
+                if(this.grafo.isPonderado()){
+                    this.pintarPesos(g, v1, v2, matriz[this.grafo.getCaminho().get(i).getId()][this.grafo.getCaminho().get(i + 1).getId()]);
                 }
             }
         }
@@ -128,9 +131,15 @@ public class GraphController {
     }
     
     private void pintarPesos(Graphics2D g, Point v1, Point v2, double peso){
-//        int fontWidth = g.getFontMetrics().stringWidth(Double.toString(peso));
-//        int fontHeight = g.getFontMetrics().getHeight() - g.getFontMetrics().getDescent();
-//        g.drawString(Double.toString(peso), v1.x - v2.x, v1.y - v2.y);
+        Point centroVertice = new Point();
+        centroVertice.x = (v1.x > v2.x)? v2.x + ((v1.x - v2.x) / 2) : v1.x + ((v2.x - v1.x) / 2);
+        centroVertice.y = (v1.y > v2.y)? v2.y + ((v1.y - v2.y) / 2) : v1.y + ((v2.y - v1.y) / 2);
+        int fontWidth = g.getFontMetrics().stringWidth(Double.toString(peso));
+        int fontHeight = g.getFontMetrics().getHeight() - g.getFontMetrics().getDescent();
+        g.setColor(Color.WHITE);
+        g.fillOval(centroVertice.x - 12, centroVertice.y - 12, fontWidth + 10, fontHeight + 10);
+        g.setColor(Color.BLACK);
+        g.drawString(Double.toString(peso), centroVertice.x - 8, centroVertice.y + fontHeight - 8);
     }
     
     public void setGrafo(Grafo grafo) {

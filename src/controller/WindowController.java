@@ -31,6 +31,7 @@ public class WindowController {
     
     public WindowController() {
         this.mainWindow = new MainWindow(this);
+        this.mainWindow.setSize(1020, 620);
         this.mainWindow.setLocationRelativeTo(null);
         this.mainWindow.setVisible(true);
         this.mainWindow.requestFocusInWindow();
@@ -48,6 +49,7 @@ public class WindowController {
         }catch(Exception e){
             Logger.getLogger(WindowController.class.getName()).log(Level.SEVERE, null, e);
         }
+        this.mainWindow.getTextAreaPath().setText("");
         this.limparRotulosVertices();
         this.prepararComboBox();
         this.graphController = new GraphController(grafoAtual, mainWindow.getGraphPanel());
@@ -106,16 +108,21 @@ public class WindowController {
         }else{
             return;
         }
-
+        this.mainWindow.getTextAreaPath().setText("");
         ArrayList<Vertice> caminho = this.grafoAtual.realizarBusca(this.grafoAtual.getIdVerticePeloRotulo(rotuloA), this.grafoAtual.getIdVerticePeloRotulo(rotuloB));
         if(caminho == null){
-//            this.mainWindow.getjTextArea1().append("Caminho Não Existe\n\n\n");
+            this.mainWindow.getTextAreaPath().append("Caminho Não Existe\n");
         }else{
+            for (Vertice caminho1 : caminho) {
+                this.mainWindow.getTextAreaPath().append(caminho1.getRotulo());
+                if(caminho1.getId() != caminho.get(caminho.size() - 1).getId()){
+                    this.mainWindow.getTextAreaPath().append(" -> ");
+                }
+            }
             this.graphController.desenharGrafo();
             if(this.mainWindow.getRadioButtonDijkstra().isSelected()){
-//                this.mainWindow.getjTextArea1().append("Custo do Caminho: " + caminho.get(caminho.size() - 1).getCustoCaminho() + "\n");
+                this.mainWindow.getTextAreaPath().append("\nCusto do Caminho: " + caminho.get(caminho.size() - 1).getCustoCaminho() + "\n");
             }
-//            this.mainWindow.getjTextArea1().append("\n");
         }
 
         this.grafoAtual.limparCaminho();
