@@ -14,8 +14,6 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.graphRepresentation.Grafo;
 import model.graphRepresentation.Vertice;

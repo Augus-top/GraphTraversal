@@ -7,24 +7,20 @@ package view;
 
 import com.alee.laf.WebLookAndFeel;
 import controller.WindowController;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
+import java.awt.Image;
+import java.io.IOException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
+
 
 /**
  *
@@ -47,10 +43,31 @@ public class MainWindow extends javax.swing.JFrame {
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         initComponents();
+        this.getContentPane().setBackground(Color.WHITE);
+        this.setButtonColor(this.botaoBuscarCaminho, Color.WHITE, Color.WHITE, Color.BLACK, Color.RED, Color.DARK_GRAY, Color.RED);
+        this.setButtonColor(this.botaoImportarXML, Color.WHITE, Color.WHITE, Color.BLACK, Color.RED, Color.DARK_GRAY, Color.RED);
+        URL urlIcon = getClass().getResource("/kancolle_icon.png");
+        Image frameIcon = null;
+        try {
+            frameIcon = ImageIO.read(urlIcon);
+        } catch (IOException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.setIconImage(frameIcon.getScaledInstance(32, 32, Image.SCALE_SMOOTH));
+        this.repaint();
     }
 
+    private void setButtonColor(com.alee.laf.button.WebButton b, Color fore, Color selFor, Color top, Color topSel, Color bot, Color botSel){
+        b.setForeground (fore);
+        b.setSelectedForeground (selFor);
+        b.setTopBgColor (top);
+        b.setTopSelectedBgColor (topSel);
+        b.setBottomBgColor (bot);
+        b.setBottomSelectedBgColor (botSel);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,8 +78,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         radioButtonAlgorithmGroup = new javax.swing.ButtonGroup();
-        buttonXML = new javax.swing.JButton();
-        buttonBuscarCaminho = new javax.swing.JButton();
         labelVerticeInicial = new javax.swing.JLabel();
         comboBoxVerticeInicial = new javax.swing.JComboBox();
         labelVerticeFinal = new javax.swing.JLabel();
@@ -74,25 +89,13 @@ public class MainWindow extends javax.swing.JFrame {
         graphPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         textAreaPath = new javax.swing.JTextArea();
+        botaoImportarXML = new com.alee.laf.button.WebButton();
+        botaoBuscarCaminho = new com.alee.laf.button.WebButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Caminho em Grafos");
         setPreferredSize(new java.awt.Dimension(1020, 620));
         setResizable(false);
-
-        buttonXML.setText("Importar XML");
-        buttonXML.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonXMLActionPerformed(evt);
-            }
-        });
-
-        buttonBuscarCaminho.setText("Buscar Caminho");
-        buttonBuscarCaminho.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonBuscarCaminhoActionPerformed(evt);
-            }
-        });
 
         labelVerticeInicial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labelVerticeInicial.setText("Vértice Inicial:");
@@ -126,36 +129,52 @@ public class MainWindow extends javax.swing.JFrame {
         radioButtonBFS.setText("BFS");
 
         graphPanel.setBackground(new java.awt.Color(255, 255, 255));
-        graphPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(51, 51, 255), null));
+        graphPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(51, 51, 255), new java.awt.Color(0, 0, 255)));
         graphPanel.setPreferredSize(new java.awt.Dimension(600, 450));
         graphPanel.setLayout(new java.awt.BorderLayout());
 
         textAreaPath.setEditable(false);
         textAreaPath.setColumns(20);
+        textAreaPath.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         textAreaPath.setRows(5);
+        textAreaPath.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(51, 255, 204), new java.awt.Color(0, 255, 204)));
         jScrollPane1.setViewportView(textAreaPath);
+
+        botaoImportarXML.setText("Importar XML");
+        botaoImportarXML.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoImportarXMLActionPerformed(evt);
+            }
+        });
+
+        botaoBuscarCaminho.setText("Buscar Caminho");
+        botaoBuscarCaminho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoBuscarCaminhoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(buttonXML, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelVerticeFinal)
                             .addComponent(labelVerticeInicial))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboBoxVerticeFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBoxVerticeInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(comboBoxVerticeInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(botaoImportarXML, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(labelAlgoritmo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +182,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(radioButtonBFS)
                             .addComponent(radioButtonDFS))
                         .addContainerGap())
-                    .addComponent(buttonBuscarCaminho, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(botaoBuscarCaminho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addComponent(graphPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -192,13 +211,13 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(radioButtonDijkstra)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(buttonXML, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                            .addComponent(buttonBuscarCaminho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botaoImportarXML, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botaoBuscarCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 14, Short.MAX_VALUE)))
-                .addGap(19, 19, 19))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboBoxVerticeInicial, labelVerticeInicial});
@@ -208,17 +227,17 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXMLActionPerformed
-        this.controller.iniciarImportacaoXML();
-    }//GEN-LAST:event_buttonXMLActionPerformed
-
-    private void buttonBuscarCaminhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarCaminhoActionPerformed
-        this.controller.iniciarBuscaCaminhoGrafo();
-    }//GEN-LAST:event_buttonBuscarCaminhoActionPerformed
-
     private void comboBoxVerticeFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxVerticeFinalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxVerticeFinalActionPerformed
+
+    private void botaoImportarXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoImportarXMLActionPerformed
+        this.controller.iniciarImportacaoXML();
+    }//GEN-LAST:event_botaoImportarXMLActionPerformed
+
+    private void botaoBuscarCaminhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarCaminhoActionPerformed
+        this.controller.iniciarBuscaCaminhoGrafo();
+    }//GEN-LAST:event_botaoBuscarCaminhoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -256,8 +275,8 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonBuscarCaminho;
-    private javax.swing.JButton buttonXML;
+    private com.alee.laf.button.WebButton botaoBuscarCaminho;
+    private com.alee.laf.button.WebButton botaoImportarXML;
     private javax.swing.JComboBox comboBoxVerticeFinal;
     private javax.swing.JComboBox comboBoxVerticeInicial;
     private javax.swing.JPanel graphPanel;

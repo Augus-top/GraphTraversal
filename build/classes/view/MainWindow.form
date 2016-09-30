@@ -33,10 +33,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="buttonXML" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="labelVerticeFinal" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="labelVerticeInicial" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -47,12 +46,13 @@
                           <Component id="comboBoxVerticeInicial" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="botaoImportarXML" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="540" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="labelAlgoritmo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -62,7 +62,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Component id="buttonBuscarCaminho" alignment="1" min="-2" pref="171" max="-2" attributes="0"/>
+                  <Component id="botaoBuscarCaminho" max="32767" attributes="0"/>
               </Group>
           </Group>
           <Component id="graphPanel" alignment="0" pref="1020" max="32767" attributes="0"/>
@@ -100,38 +100,22 @@
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="buttonXML" pref="48" max="32767" attributes="0"/>
-                          <Component id="buttonBuscarCaminho" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="botaoImportarXML" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="botaoBuscarCaminho" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" min="-2" pref="121" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="115" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="buttonXML">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Importar XML"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonXMLActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="buttonBuscarCaminho">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Buscar Caminho"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBuscarCaminhoActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="labelVerticeInicial">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -222,6 +206,7 @@
           <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
             <EtchetBorder>
               <Color PropertyName="highlight" blue="ff" green="33" red="33" type="rgb"/>
+              <Color PropertyName="shadow" blue="ff" green="0" red="0" type="rgb"/>
             </EtchetBorder>
           </Border>
         </Property>
@@ -243,10 +228,37 @@
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="columns" type="int" value="20"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Courier New" size="13" style="0"/>
+            </Property>
             <Property name="rows" type="int" value="5"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                <EtchetBorder>
+                  <Color PropertyName="highlight" blue="cc" green="ff" red="33" type="rgb"/>
+                  <Color PropertyName="shadow" blue="cc" green="ff" red="0" type="rgb"/>
+                </EtchetBorder>
+              </Border>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
+    <Component class="com.alee.laf.button.WebButton" name="botaoImportarXML">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Importar XML"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoImportarXMLActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="com.alee.laf.button.WebButton" name="botaoBuscarCaminho">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Buscar Caminho"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoBuscarCaminhoActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

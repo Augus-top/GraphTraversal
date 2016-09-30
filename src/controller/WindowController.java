@@ -7,8 +7,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.bethecoder.ascii_table.ASCIITable;
 import javax.swing.DefaultComboBoxModel;
 import model.graphRepresentation.Grafo;
 import view.MainWindow;
@@ -46,6 +45,8 @@ public class WindowController {
                 this.grafoAtual = this.xmlController.lerGrafo(fileChooser.getSelectedFile());
                 this.limparVertices();
                 JFileChooserController.storeLastDirectory(fileChooser);
+            }else{
+                return;
             }
         }catch(Exception e){
             this.grafoAtual = null;
@@ -119,6 +120,10 @@ public class WindowController {
         }
         this.mainWindow.getTextAreaPath().setText("");
         ArrayList<Vertice> caminho = this.grafoAtual.realizarBusca(this.grafoAtual.getIdVerticePeloRotulo(rotuloA), this.grafoAtual.getIdVerticePeloRotulo(rotuloB));
+        this.finalizarBuscaCaminho(caminho);
+    }
+    
+    private void finalizarBuscaCaminho(ArrayList<Vertice> caminho){
         if(caminho == null){
             this.mainWindow.getTextAreaPath().append("Caminho Não Existe\n");
         }else{
@@ -128,11 +133,35 @@ public class WindowController {
                     this.mainWindow.getTextAreaPath().append(" -> ");
                 }
             }
-            if(this.mainWindow.getRadioButtonDijkstra().isSelected()){
-                this.mainWindow.getTextAreaPath().append("\nCusto do Caminho: " + caminho.get(caminho.size() - 1).getCustoCaminho());
-            }
+        }
+        if(this.mainWindow.getRadioButtonDijkstra().isSelected()){
+            pintarTabelaDijkstra();
         }
         this.graphController.desenharGrafo();
+        this.definirGrafoConexo();
+        this.grafoAtual.limparCaminho();
+    }
+    
+    private void pintarTabelaDijkstra(){
+        String[] header = new String[grafoAtual.getNumeroVertices() + 1];
+        String[][] dados = new String[2][grafoAtual.getNumeroVertices() + 1];
+        header[0] = "Vértices";
+        dados[0][0] = "Estimativas";
+        dados[1][0] = "Precedentes";
+        for (int i = 0; i < grafoAtual.getNumeroVertices(); i++) {
+            header[i + 1] = grafoAtual.getArrayVertice().get(i).getRotulo();
+            dados[0][i + 1] = Double.toString(grafoAtual.getArrayVertice().get(i).getCustoCaminho());
+            if(grafoAtual.getArrayVertice().get(i).getVerticePai() == null){
+                dados[1][i + 1] = "--";
+            }else{
+                dados[1][i + 1] = grafoAtual.getArrayVertice().get(i).getVerticePai().getRotulo();
+            }
+        }
+        String tabela = ASCIITable.getInstance().getTable(header, dados);
+        this.mainWindow.getTextAreaPath().append("\n\n" + tabela);
+    }
+    
+    private void definirGrafoConexo(){
         if(this.grafoAtual.isConexo()){
             this.mainWindow.getTextAreaPath().append("\nO Grafo é conexo");
         }else{
@@ -142,6 +171,5 @@ public class WindowController {
                 this.mainWindow.getTextAreaPath().append("\nO Grafo não é conexo");
             }
         }
-        this.grafoAtual.limparCaminho();
     }
 }
