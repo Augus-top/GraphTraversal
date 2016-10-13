@@ -235,8 +235,10 @@ public class WindowController {
         }else{
             this.starWindow.getTextAreaPath().setText("Caminho não Encontrado");
         }
+        this.mapController.getMapa().getVerticeInicial().setStatusMapa(2);
         this.mapController.pintarMapa();
         this.starWindow.getMapPanel().revalidate();
+        this.mapController.getMapa().limparMapa();
     }
     
     public void retornarTelaPrincipal(){

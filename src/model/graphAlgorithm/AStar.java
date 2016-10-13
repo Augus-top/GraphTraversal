@@ -128,6 +128,7 @@ public class AStar {
            }
            atual = atual.getVerticePai();
         }
+        this.listaAberta.clear();
     }
     
     public void addListaAberta(Vertice a){

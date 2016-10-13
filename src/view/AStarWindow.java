@@ -81,6 +81,7 @@ public class AStarWindow extends javax.swing.JFrame {
         botaoRetornar = new com.alee.laf.button.WebButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Caminho A*");
         setResizable(false);
 
         botaoImportarXML.setText("Importar XML");

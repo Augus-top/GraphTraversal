@@ -21,6 +21,7 @@ public class MapaEstrela {
     private int l;
     private int c;
     private AStar buscaAStar;
+    private Vertice verticeInicial;
     
     public boolean buscarCaminhoAStar(){    
         return this.buscaAStar.buscarCaminho();
@@ -38,7 +39,17 @@ public class MapaEstrela {
         this.buscaAStar = new AStar(this.mapa, l, c);
     }
 
-
+    public void limparMapa(){
+        for (int i = 0; i < l; i++) {
+            for (int j = 0; j < c; j++) {
+                if(this.mapa[i][j].getStatusMapa() != BARREIRA && this.mapa[i][j].getStatusMapa() != PONTO_INICIAL && this.mapa[i][j].getStatusMapa() != PONTO_FINAL){
+                    this.mapa[i][j].setStatusMapa(0);
+                }else if(this.mapa[i][j].getStatusMapa() == PONTO_INICIAL){
+                    this.buscaAStar.addListaAberta(this.mapa[i][j]);
+                }
+            }
+        }
+    }
     
     public void setBarreira(int l, int c){
         this.mapa[l][c].setStatusMapa(BARREIRA);
@@ -47,6 +58,7 @@ public class MapaEstrela {
     public void setPontoInicial(int l, int c){
         this.mapa[l][c].setStatusMapa(PONTO_INICIAL);
         this.buscaAStar.addListaAberta(this.mapa[l][c]);
+        this.verticeInicial = this.mapa[l][c];
     }
     
     public void setPontoFinal(int l,  int c){
@@ -69,4 +81,10 @@ public class MapaEstrela {
     public ArrayList<Vertice> getCaminhoAStar(){
         return this.buscaAStar.getCaminho();
     }
+
+    public Vertice getVerticeInicial() {
+        return verticeInicial;
+    }
+    
+    
 }
