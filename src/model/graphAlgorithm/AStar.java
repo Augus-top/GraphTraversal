@@ -5,7 +5,7 @@
  */
 package model.graphAlgorithm;
 
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 import model.graphRepresentation.Vertice;
 
@@ -16,17 +16,16 @@ import model.graphRepresentation.Vertice;
 public class AStar {
     private Vertice mapa[][];
     private PriorityQueue<Vertice> listaAberta;
-    private PriorityQueue<Vertice> listaFechada;
     private Vertice verticeFinal;
     private int l;
     private int c;
+    private ArrayList<Vertice> caminho = new ArrayList<Vertice>();
     
     public AStar(Vertice[][] mapa, int l, int c) {
         this.mapa = mapa;
         this.l = l;
         this.c = c;
         this.listaAberta = new PriorityQueue<>(new ComparadorVerticesCusto());
-        this.listaFechada = new PriorityQueue<>(new ComparadorVerticesCusto());
     }
     
     public boolean avaliarVizinho(Vertice vizinho, Vertice pai, double novoG){
@@ -103,6 +102,7 @@ public class AStar {
     }
     
     public boolean buscarCaminho(){
+        this.caminho.clear();
         Vertice verticeAtual;
         while(!this.listaAberta.isEmpty()){
             verticeAtual = this.listaAberta.poll();
@@ -116,12 +116,15 @@ public class AStar {
     }
     
     private void reproduzirCaminho(){
+        this.caminho.add(verticeFinal);
         Vertice atual = verticeFinal.getVerticePai();
         while(atual != null){
            atual.setStatusMapa(6);
            if(atual.getVerticePai() == null){
                atual.setStatusMapa(2);
                break;
+           }else{
+               caminho.add(0, atual);
            }
            atual = atual.getVerticePai();
         }
@@ -130,12 +133,12 @@ public class AStar {
     public void addListaAberta(Vertice a){
         this.listaAberta.add(a);
     }
-    
-    public void addListaFechada(Vertice a){
-        this.listaFechada.add(a);
-    }
 
     public void setVerticeFinal(Vertice verticeFinal) {
         this.verticeFinal = verticeFinal;
+    }
+
+    public ArrayList<Vertice> getCaminho() {
+        return caminho;
     }
 }

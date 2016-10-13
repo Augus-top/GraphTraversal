@@ -212,8 +212,26 @@ public class WindowController {
     }
     
     public void iniciarBuscaAStar(){
+        this.starWindow.getTextAreaPath().setText("");
         if(this.mapController.getMapa().buscarCaminhoAStar()){
-            this.starWindow.getTextAreaPath().setText("Caminho Encontrado");
+            ArrayList<Vertice> caminho = this.mapController.getMapa().getCaminhoAStar();
+            String[] header = new String[caminho.size() + 1];
+            String[][] dados = new String[4][caminho.size() + 1];
+            header[0] = "Passo ";
+            dados[0][0] = "Posição";
+            dados[1][0] = "Valor F";
+            dados[2][0] = "Valor G";
+            dados[3][0] = "Valor H";
+            
+            for (int i = 0; i < caminho.size(); i++) {
+                header[i + 1] = Integer.toString(i + 1);
+                dados[0][i + 1] = "" + caminho.get(i).getPosicao().x + ", " + caminho.get(i).getPosicao().y;
+                dados[1][i + 1] = "" + caminho.get(i).getCustoCaminho();
+                dados[2][i + 1] = "" + caminho.get(i).getCustoG();
+                dados[3][i + 1] = "" + (caminho.get(i).getCustoCaminho() - caminho.get(i).getCustoG());
+            }
+            String tabela = ASCIITable.getInstance().getTable(header, dados);
+            this.starWindow.getTextAreaPath().append(tabela);
         }else{
             this.starWindow.getTextAreaPath().setText("Caminho não Encontrado");
         }

@@ -36,6 +36,8 @@ public class MapController {
         Dimension squareSize = new Dimension((this.mapPainel.getHeight() - 5) / this.mapa.getL(), (this.mapPainel.getHeight() - 5) / this.mapa.getC());
         for (int i = 0; i < this.mapa.getL(); i++) {
             for (int j = 0; j < this.mapa.getC(); j++) {
+                Double n = m[i][j].getCustoCaminho();
+                String custo = Integer.toString(n.intValue());
                 JPanel square = new JPanel();
                 switch(m[i][j].getStatusMapa()){
                     case 0:
@@ -56,7 +58,7 @@ public class MapController {
                                 g.drawString("I", squareSize.width - (fontWidth / 2), squareSize.height / 2 + 1 + (fontHeight / 2));
                             }
                         };
-                        square.setBackground(Color.GREEN);
+                        square.setBackground(new Color(170, 23, 255));
                     break;
                     case 3:
                         square = new JPanel(){
@@ -73,13 +75,46 @@ public class MapController {
                         square.setBackground(Color.RED);
                     break;
                     case 4:
-                        square.setBackground(Color.WHITE);
+                        square = new JPanel(){
+                            @Override
+                            protected void paintComponent(Graphics g) {
+                                super.paintComponent(g);
+                                g.setColor(Color.WHITE);
+                                g.setFont(new Font("Ariel", Font.PLAIN, squareSize.height - 5));
+                                int fontWidth = g.getFontMetrics().stringWidth(custo);
+                                int fontHeight = g.getFontMetrics().getHeight() - g.getFontMetrics().getDescent();
+                                g.drawString(custo, squareSize.width - (fontWidth / 2), squareSize.height / 2 + 1 + (fontHeight / 2));
+                            }
+                        };
+                        square.setBackground(Color.GRAY);
                     break;
                     case 5:
-                        square.setBackground(Color.ORANGE);
+                        square = new JPanel(){
+                            @Override
+                            protected void paintComponent(Graphics g) {
+                                super.paintComponent(g);
+                                g.setColor(Color.WHITE);
+                                g.setFont(new Font("Ariel", Font.PLAIN, squareSize.height - 5));
+                                int fontWidth = g.getFontMetrics().stringWidth(custo);
+                                int fontHeight = g.getFontMetrics().getHeight() - g.getFontMetrics().getDescent();
+                                g.drawString(custo, squareSize.width - (fontWidth / 2), squareSize.height / 2 + 1 + (fontHeight / 2));
+                            }
+                        };
+                        square.setBackground(new Color(23, 150, 255));
                     break;
                     case 6:
-                        square.setBackground(Color.BLUE);
+                        square = new JPanel(){
+                            @Override
+                            protected void paintComponent(Graphics g) {
+                                super.paintComponent(g);
+                                g.setColor(Color.WHITE);
+                                g.setFont(new Font("Ariel", Font.PLAIN, squareSize.height - 5));
+                                int fontWidth = g.getFontMetrics().stringWidth(custo);
+                                int fontHeight = g.getFontMetrics().getHeight() - g.getFontMetrics().getDescent();
+                                g.drawString(custo, squareSize.width - (fontWidth / 2), squareSize.height / 2 + 1 + (fontHeight / 2));
+                            }
+                        };
+                        square.setBackground(Color.GREEN);
                     break;
                 }
                 square.setBorder(new LineBorder(Color.BLACK, 2));

@@ -6,6 +6,7 @@
 package model.graphRepresentation;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import model.graphAlgorithm.AStar;
 
 /**
@@ -20,7 +21,6 @@ public class MapaEstrela {
     private int l;
     private int c;
     private AStar buscaAStar;
-    
     
     public boolean buscarCaminhoAStar(){    
         return this.buscaAStar.buscarCaminho();
@@ -42,7 +42,6 @@ public class MapaEstrela {
     
     public void setBarreira(int l, int c){
         this.mapa[l][c].setStatusMapa(BARREIRA);
-        this.buscaAStar.addListaFechada(this.mapa[l][c]);
     }
     
     public void setPontoInicial(int l, int c){
@@ -65,5 +64,9 @@ public class MapaEstrela {
 
     public int getC() {
         return c;
+    }
+    
+    public ArrayList<Vertice> getCaminhoAStar(){
+        return this.buscaAStar.getCaminho();
     }
 }
