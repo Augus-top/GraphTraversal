@@ -15,7 +15,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import model.graphAlgorithm.ComparadorVerticesRotulo;
+import model.graphRepresentation.MapaEstrela;
 import model.graphRepresentation.Vertice;
+import view.AStarWindow;
 
 /**
  *
@@ -27,10 +29,12 @@ public class WindowController {
     private XMLController xmlController = new XMLController();
     private Grafo grafoAtual;
     private GraphController graphController;
+    private AStarWindow starWindow;
+    private MapController mapController;
     
     public WindowController() {
         this.mainWindow = new MainWindow(this);
-        this.mainWindow.setSize(1020, 620);
+        this.mainWindow.setSize(1100, 620);
         this.mainWindow.setLocationRelativeTo(null);
         this.mainWindow.setVisible(true);
         this.mainWindow.requestFocusInWindow();
@@ -171,5 +175,42 @@ public class WindowController {
                 this.mainWindow.getTextAreaPath().append("\nO Grafo não é conexo");
             }
         }
+    }
+    
+    public void iniciarAStar(){
+        this.starWindow = new AStarWindow(this);
+        this.mapController = new MapController(this.starWindow.getMapPanel(), this);
+        this.starWindow.setSize(1100, 620);
+        this.starWindow.setLocationRelativeTo(null);
+        this.starWindow.setVisible(true);
+        this.mainWindow.setVisible(false);
+    }
+    
+    public void iniciarImportacaoXMLAStar(){
+        MapaEstrela novoMapa = null;
+        try{
+            JFileChooser fileChooser = new JFileChooser(JFileChooserController.getLastDirectory());
+            FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("Arquivo XML", "xml");
+            fileChooser.setFileFilter(extensionFilter);
+            if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+                novoMapa = this.xmlController.construirMapa(fileChooser.getSelectedFile());
+                this.mapController.setMapa(novoMapa);
+                this.mapController.pintarMapa();
+                JFileChooserController.storeLastDirectory(fileChooser);
+            }else{
+                return;
+            }
+        }catch(Exception e){
+            this.starWindow.getMapPanel().removeAll();
+            this.starWindow.repaint();
+            JOptionPane.showMessageDialog(this.starWindow, "Erro no XML");
+            return;
+        }
+        this.starWindow.getTextAreaPath().setText("");
+    }
+    
+    public void retornarTelaPrincipal(){
+        this.mainWindow.setVisible(true);
+        this.starWindow.setVisible(false);
     }
 }

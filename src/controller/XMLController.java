@@ -8,12 +8,17 @@ package controller;
 import java.awt.Point;
 import model.graphRepresentation.Grafo;
 import java.io.File;
+import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import model.graphRepresentation.MapaEstrela;
+import model.graphRepresentation.Vertice;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -60,6 +65,43 @@ public class XMLController {
             }
         }
         return grafo;
+    }
+    
+    public MapaEstrela construirMapa(File file) throws Exception{
+        MapaEstrela novoMapa = new MapaEstrela();
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(file);
+        doc.getDocumentElement().normalize();
+        try{
+            NodeList nodes = doc.getElementsByTagName("LINHAS");
+            Node node = nodes.item(0);
+            int linha = Integer.parseInt(node.getTextContent());
+            nodes = doc.getElementsByTagName("COLUNAS");
+            node = nodes.item(0);
+            int coluna = Integer.parseInt(node.getTextContent());
+            novoMapa.setTamanhoMapa(linha, coluna);
+            nodes = doc.getElementsByTagName("INICIAL");
+            node = nodes.item(0);
+            String ponto = node.getTextContent();
+            String[] pos = ponto.split(",");
+            novoMapa.setPontoInicial(Integer.parseInt(pos[0]) - 1, Integer.parseInt(pos[1]) - 1);
+            nodes = doc.getElementsByTagName("FINAL");
+            node = nodes.item(0);
+            ponto = node.getTextContent();
+            pos = ponto.split(",");
+            novoMapa.setPontoFinal(Integer.parseInt(pos[0]) - 1, Integer.parseInt(pos[1]) - 1);
+            nodes = doc.getElementsByTagName("MURO");
+            for (int i = 0; i < nodes.getLength(); i++) {
+                node = nodes.item(i);
+                ponto = node.getTextContent();
+                pos = ponto.split(",");
+                novoMapa.setBarreira(Integer.parseInt(pos[0]) - 1, Integer.parseInt(pos[1]) - 1);
+            }
+        }catch(Exception ex){
+            System.err.println(ex);
+        }
+        return novoMapa;
     }
     
 }

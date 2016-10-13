@@ -18,6 +18,7 @@ public class Vertice {
     private boolean visitado = false; 
     private Vertice verticePai = null;
     private double custoCaminho = -1;
+    private int statusMapa = 0;
     
     public Vertice(Point point, int id, String rotulo) {
         this.posicao = point;
@@ -49,6 +50,10 @@ public class Vertice {
         return visitado;
     }
 
+    public int getStatusMapa() {
+        return statusMapa;
+    }
+    
     public void setPosicao(Point posicao) {
         this.posicao = posicao;
     }
@@ -68,6 +73,8 @@ public class Vertice {
     public void setCustoCaminho(double custoCaminho) {
         this.custoCaminho = custoCaminho;
     }
-    
-    
+
+    public void setStatusMapa(int statusMapa) {
+        this.statusMapa = statusMapa;
+    }
 }
