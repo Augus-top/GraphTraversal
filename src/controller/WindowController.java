@@ -196,6 +196,8 @@ public class WindowController {
                 novoMapa = this.xmlController.construirMapa(fileChooser.getSelectedFile());
                 this.mapController.setMapa(novoMapa);
                 this.mapController.pintarMapa();
+                this.starWindow.repaint();
+                this.starWindow.getMapPanel().revalidate();
                 JFileChooserController.storeLastDirectory(fileChooser);
             }else{
                 return;
@@ -207,6 +209,16 @@ public class WindowController {
             return;
         }
         this.starWindow.getTextAreaPath().setText("");
+    }
+    
+    public void iniciarBuscaAStar(){
+        if(this.mapController.getMapa().buscarCaminhoAStar()){
+            this.starWindow.getTextAreaPath().setText("Caminho Encontrado");
+        }else{
+            this.starWindow.getTextAreaPath().setText("Caminho não Encontrado");
+        }
+        this.mapController.pintarMapa();
+        this.starWindow.getMapPanel().revalidate();
     }
     
     public void retornarTelaPrincipal(){

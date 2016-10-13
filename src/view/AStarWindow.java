@@ -156,7 +156,7 @@ public class AStarWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoImportarXMLActionPerformed
 
     private void botaoBuscarCaminhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarCaminhoActionPerformed
-        this.controller.iniciarBuscaCaminhoGrafo();
+        this.controller.iniciarBuscaAStar();
     }//GEN-LAST:event_botaoBuscarCaminhoActionPerformed
 
     private void botaoRetornarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRetornarActionPerformed

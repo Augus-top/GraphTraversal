@@ -7,9 +7,10 @@ package controller;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import model.graphRepresentation.MapaEstrela;
 import model.graphRepresentation.Vertice;
@@ -36,9 +37,6 @@ public class MapController {
         for (int i = 0; i < this.mapa.getL(); i++) {
             for (int j = 0; j < this.mapa.getC(); j++) {
                 JPanel square = new JPanel();
-                square.setBorder(new LineBorder(Color.BLACK, 2));
-                square.setPreferredSize(squareSize);
-                square.setPreferredSize(squareSize);
                 switch(m[i][j].getStatusMapa()){
                     case 0:
                         square.setBackground(Color.WHITE);
@@ -47,16 +45,53 @@ public class MapController {
                         square.setBackground(Color.BLACK);
                     break;
                     case 2:
+                        square = new JPanel(){
+                            @Override
+                            protected void paintComponent(Graphics g) {
+                                super.paintComponent(g);
+                                g.setColor(Color.WHITE);
+                                g.setFont(new Font("Ariel", Font.PLAIN, squareSize.height - 5));
+                                int fontWidth = g.getFontMetrics().stringWidth("I");
+                                int fontHeight = g.getFontMetrics().getHeight() - g.getFontMetrics().getDescent();
+                                g.drawString("I", squareSize.width - (fontWidth / 2), squareSize.height / 2 + 1 + (fontHeight / 2));
+                            }
+                        };
                         square.setBackground(Color.GREEN);
                     break;
                     case 3:
+                        square = new JPanel(){
+                            @Override
+                            protected void paintComponent(Graphics g) {
+                                super.paintComponent(g);
+                                g.setColor(Color.WHITE);
+                                g.setFont(new Font("Ariel", Font.PLAIN, squareSize.height - 5));
+                                int fontWidth = g.getFontMetrics().stringWidth("F");
+                                int fontHeight = g.getFontMetrics().getHeight() - g.getFontMetrics().getDescent();
+                                g.drawString("F", squareSize.width - (fontWidth / 2), squareSize.height / 2 + 1 + (fontHeight / 2));
+                            }
+                        };
                         square.setBackground(Color.RED);
                     break;
+                    case 4:
+                        square.setBackground(Color.WHITE);
+                    break;
+                    case 5:
+                        square.setBackground(Color.ORANGE);
+                    break;
+                    case 6:
+                        square.setBackground(Color.BLUE);
+                    break;
                 }
+                square.setBorder(new LineBorder(Color.BLACK, 2));
+                square.setPreferredSize(squareSize);
+                square.setPreferredSize(squareSize);
                 this.mapPainel.add(square);
             }
         }
-        this.mapPainel.revalidate();
+    }
+
+    public MapaEstrela getMapa() {
+        return mapa;
     }
     
     public void setMapa(MapaEstrela mapaEstrela) {
