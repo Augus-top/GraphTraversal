@@ -44,6 +44,7 @@ public class AStarWindow extends javax.swing.JFrame {
         this.setButtonColor(this.botaoBuscarCaminho, Color.WHITE, Color.WHITE, Color.BLACK, Color.RED, Color.DARK_GRAY, Color.RED);
         this.setButtonColor(this.botaoImportarXML, Color.WHITE, Color.WHITE, Color.BLACK, Color.RED, Color.DARK_GRAY, Color.RED);
         this.setButtonColor(this.botaoRetornar, Color.WHITE, Color.WHITE, Color.BLACK, Color.RED, Color.DARK_GRAY, Color.RED);
+        this.setButtonColor(this.botaoStepbyStep, Color.WHITE, Color.WHITE, Color.BLACK, Color.RED, Color.DARK_GRAY, Color.RED);
         URL urlIcon = getClass().getResource("/kancolle_icon.png");
         Image frameIcon = null;
         try {
@@ -79,6 +80,7 @@ public class AStarWindow extends javax.swing.JFrame {
         textAreaPath = new javax.swing.JTextArea();
         botaoBuscarCaminho = new com.alee.laf.button.WebButton();
         botaoRetornar = new com.alee.laf.button.WebButton();
+        botaoStepbyStep = new com.alee.laf.button.WebButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Caminho A*");
@@ -117,6 +119,13 @@ public class AStarWindow extends javax.swing.JFrame {
             }
         });
 
+        botaoStepbyStep.setText("Passo a Passo");
+        botaoStepbyStep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoStepbyStepActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,7 +138,9 @@ public class AStarWindow extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botaoBuscarCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botaoBuscarCaminho, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoStepbyStep, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,9 +151,11 @@ public class AStarWindow extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(botaoBuscarCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(botaoStepbyStep, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
+                        .addGap(8, 8, 8)
                         .addComponent(botaoImportarXML, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(botaoRetornar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -157,12 +170,16 @@ public class AStarWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoImportarXMLActionPerformed
 
     private void botaoBuscarCaminhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarCaminhoActionPerformed
-        this.controller.iniciarBuscaAStar();
+        this.controller.iniciarBuscaAStar(false);
     }//GEN-LAST:event_botaoBuscarCaminhoActionPerformed
 
     private void botaoRetornarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRetornarActionPerformed
         this.controller.retornarTelaPrincipal();
     }//GEN-LAST:event_botaoRetornarActionPerformed
+
+    private void botaoStepbyStepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoStepbyStepActionPerformed
+        this.controller.iniciarBuscaAStar(true);
+    }//GEN-LAST:event_botaoStepbyStepActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,6 +220,7 @@ public class AStarWindow extends javax.swing.JFrame {
     private com.alee.laf.button.WebButton botaoBuscarCaminho;
     private com.alee.laf.button.WebButton botaoImportarXML;
     private com.alee.laf.button.WebButton botaoRetornar;
+    private com.alee.laf.button.WebButton botaoStepbyStep;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mapPanel;
     private javax.swing.JTextArea textAreaPath;

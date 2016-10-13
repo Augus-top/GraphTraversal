@@ -5,25 +5,52 @@
  */
 package model.graphRepresentation;
 
+import controller.WindowController;
 import java.awt.Point;
 import java.util.ArrayList;
 import model.graphAlgorithm.AStar;
+import model.graphAlgorithm.AStarStepByStep;
+import model.graphAlgorithm.AlgoritmoAStar;
 
 /**
  *
  * @author Augustop
  */
-public class MapaEstrela {
+public class MapaEstrela implements Runnable{
     private Vertice mapa[][];
     public static final int BARREIRA = 1;
     public static final int PONTO_INICIAL = 2;
     public static final int PONTO_FINAL = 3;
     private int l;
     private int c;
-    private AStar buscaAStar;
+    private AlgoritmoAStar buscaAStar;
     private Vertice verticeInicial;
+    private Vertice verticeFinal;
+    private WindowController ctr;
+    private boolean threadExecucao = false;
     
-    public boolean buscarCaminhoAStar(){    
+    public MapaEstrela(WindowController ctr) {
+        this.ctr = ctr;
+    }
+    
+    @Override
+    public void run() {
+        this.threadExecucao = true;
+        this.ctr.finalizarAStar(this.buscaAStar.buscarCaminho());
+        this.threadExecucao = false;
+    }
+    
+    public boolean buscarCaminhoAStar(boolean stepByStep){
+        if(stepByStep){
+            this.buscaAStar = new AStarStepByStep(mapa, l, c, this);
+            this.buscaAStar.addListaAberta(verticeInicial);
+            this.buscaAStar.setVerticeFinal(this.verticeFinal);
+            return false;
+        }else{
+            this.buscaAStar = new AStar(this.mapa, l, c, this);
+        }
+        this.buscaAStar.addListaAberta(verticeInicial);
+        this.buscaAStar.setVerticeFinal(this.verticeFinal);
         return this.buscaAStar.buscarCaminho();
     }
     
@@ -36,7 +63,6 @@ public class MapaEstrela {
                 this.mapa[i][j] = new Vertice(new Point(i, j), 1, "A");
             }
         }
-        this.buscaAStar = new AStar(this.mapa, l, c);
     }
 
     public void limparMapa(){
@@ -57,13 +83,12 @@ public class MapaEstrela {
     
     public void setPontoInicial(int l, int c){
         this.mapa[l][c].setStatusMapa(PONTO_INICIAL);
-        this.buscaAStar.addListaAberta(this.mapa[l][c]);
         this.verticeInicial = this.mapa[l][c];
     }
     
     public void setPontoFinal(int l,  int c){
         this.mapa[l][c].setStatusMapa(PONTO_FINAL);
-        this.buscaAStar.setVerticeFinal(this.mapa[l][c]);
+        this.verticeFinal = this.mapa[l][c];
     }
 
     public Vertice[][] getMapa() {
@@ -85,6 +110,13 @@ public class MapaEstrela {
     public Vertice getVerticeInicial() {
         return verticeInicial;
     }
-    
-    
+
+    public WindowController getCtr() {
+        return ctr;
+    }
+
+    public boolean isThreadExecucao() {
+        return threadExecucao;
+    }
+
 }

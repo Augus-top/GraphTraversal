@@ -26,7 +26,7 @@ import view.AStarWindow;
 
 public class WindowController {
     private MainWindow mainWindow;
-    private XMLController xmlController = new XMLController();
+    private XMLController xmlController = new XMLController(this);
     private Grafo grafoAtual;
     private GraphController graphController;
     private AStarWindow starWindow;
@@ -187,6 +187,9 @@ public class WindowController {
     }
     
     public void iniciarImportacaoXMLAStar(){
+        if(this.mapController.getMapa() != null && this.mapController.getMapa().isThreadExecucao()){
+            return;
+        }
         MapaEstrela novoMapa = null;
         try{
             JFileChooser fileChooser = new JFileChooser(JFileChooserController.getLastDirectory());
@@ -211,9 +214,23 @@ public class WindowController {
         this.starWindow.getTextAreaPath().setText("");
     }
     
-    public void iniciarBuscaAStar(){
+    public void iniciarBuscaAStar(boolean stepByStep){
+        if(this.mapController.getMapa().isThreadExecucao()){
+            return;
+        }
         this.starWindow.getTextAreaPath().setText("");
-        if(this.mapController.getMapa().buscarCaminhoAStar()){
+        if(stepByStep == true){
+            this.mapController.getMapa().buscarCaminhoAStar(stepByStep);
+            Thread t = new Thread(this.mapController.getMapa());
+            t.start();
+        }else{
+            this.finalizarAStar(this.mapController.getMapa().buscarCaminhoAStar(stepByStep));
+        }
+
+    }
+    
+    public void finalizarAStar(boolean encontrouCaminho){
+        if(encontrouCaminho){
             ArrayList<Vertice> caminho = this.mapController.getMapa().getCaminhoAStar();
             String[] header = new String[caminho.size() + 1];
             String[][] dados = new String[4][caminho.size() + 1];
@@ -233,7 +250,7 @@ public class WindowController {
             String tabela = ASCIITable.getInstance().getTable(header, dados);
             this.starWindow.getTextAreaPath().append(tabela);
         }else{
-            this.starWindow.getTextAreaPath().setText("Caminho não Encontrado");
+            this.starWindow.getTextAreaPath().setText("Caminho não Existe");
         }
         this.mapController.getMapa().getVerticeInicial().setStatusMapa(2);
         this.mapController.pintarMapa();
@@ -242,7 +259,14 @@ public class WindowController {
     }
     
     public void retornarTelaPrincipal(){
+        if(this.mapController.getMapa().isThreadExecucao()){
+            return;
+        }
         this.mainWindow.setVisible(true);
         this.starWindow.setVisible(false);
+    }
+
+    public MapController getMapController() {
+        return mapController;
     }
 }

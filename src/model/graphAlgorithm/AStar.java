@@ -7,27 +7,20 @@ package model.graphAlgorithm;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
+import model.graphRepresentation.MapaEstrela;
 import model.graphRepresentation.Vertice;
 
 /**
  *
  * @author Augustop
  */
-public class AStar {
-    private Vertice mapa[][];
-    private PriorityQueue<Vertice> listaAberta;
-    private Vertice verticeFinal;
-    private int l;
-    private int c;
-    private ArrayList<Vertice> caminho = new ArrayList<Vertice>();
-    
-    public AStar(Vertice[][] mapa, int l, int c) {
-        this.mapa = mapa;
-        this.l = l;
-        this.c = c;
-        this.listaAberta = new PriorityQueue<>(new ComparadorVerticesCusto());
+public class AStar extends AlgoritmoAStar{
+
+    public AStar(Vertice[][] mapa, int l, int c, MapaEstrela mapaest) {
+        super(mapa, l, c, mapaest);
     }
-    
+
+    @Override
     public boolean avaliarVizinho(Vertice vizinho, Vertice pai, double novoG){
         double novoCusto = (10 * (Math.abs(vizinho.getPosicao().x - this.verticeFinal.getPosicao().x) + Math.abs(vizinho.getPosicao().y - this.verticeFinal.getPosicao().y))) + novoG + pai.getCustoG();
         if(vizinho.getStatusMapa() == 0){
@@ -55,6 +48,7 @@ public class AStar {
         return false;
     }
     
+    @Override
     public boolean procurarVizinhos(Vertice verticePai){
         int x = verticePai.getPosicao().x;
         int y = verticePai.getPosicao().y;
@@ -101,6 +95,7 @@ public class AStar {
         return false;
     }
     
+    @Override
     public boolean buscarCaminho(){
         this.caminho.clear();
         Vertice verticeAtual;
@@ -131,15 +126,23 @@ public class AStar {
         this.listaAberta.clear();
     }
     
+    @Override
     public void addListaAberta(Vertice a){
         this.listaAberta.add(a);
     }
 
+    @Override
     public void setVerticeFinal(Vertice verticeFinal) {
         this.verticeFinal = verticeFinal;
     }
 
+    @Override
     public ArrayList<Vertice> getCaminho() {
         return caminho;
+    }
+
+    @Override
+    public boolean encontrouCaminho() {
+        return this.encontrouCaminho;
     }
 }

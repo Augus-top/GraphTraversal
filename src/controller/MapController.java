@@ -32,6 +32,7 @@ public class MapController {
     public void pintarMapa(){
         this.mapPainel.removeAll();
         Vertice[][] m = this.mapa.getMapa();
+        this.mapa.getVerticeInicial().setStatusMapa(2);
         this.mapPainel.setLayout(new GridLayout(this.mapa.getL(), this.mapa.getC()));
         Dimension squareSize = new Dimension((this.mapPainel.getHeight() - 5) / this.mapa.getL(), (this.mapPainel.getHeight() - 5) / this.mapa.getC());
         for (int i = 0; i < this.mapa.getL(); i++) {
@@ -131,5 +132,9 @@ public class MapController {
     
     public void setMapa(MapaEstrela mapaEstrela) {
         this.mapa = mapaEstrela;
+    }
+
+    public JPanel getMapPainel() {
+        return mapPainel;
     }
 }

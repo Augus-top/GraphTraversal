@@ -25,6 +25,11 @@ import org.xml.sax.SAXException;
  * @author Augustop
  */
 public class XMLController {
+    private WindowController windowController;
+
+    public XMLController(WindowController windowController) {
+        this.windowController = windowController;
+    }
     
     public Grafo lerGrafo(File file) throws Exception{
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -68,7 +73,7 @@ public class XMLController {
     }
     
     public MapaEstrela construirMapa(File file) throws Exception{
-        MapaEstrela novoMapa = new MapaEstrela();
+        MapaEstrela novoMapa = new MapaEstrela(this.windowController);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(file);
