@@ -32,7 +32,7 @@ public class MapController {
     public void pintarMapa(){
         this.mapPainel.removeAll();
         Vertice[][] m = this.mapa.getMapa();
-        this.mapa.getVerticeInicial().setStatusMapa(2);
+        this.mapa.getVerticeInicial().setStatusMapa(Vertice.StatusMapa.PONTO_INICIAL);
         this.mapPainel.setLayout(new GridLayout(this.mapa.getL(), this.mapa.getC()));
         Dimension squareSize = new Dimension((this.mapPainel.getHeight() - 5) / this.mapa.getL(), (this.mapPainel.getHeight() - 5) / this.mapa.getC());
         for (int i = 0; i < this.mapa.getL(); i++) {
@@ -41,13 +41,13 @@ public class MapController {
                 String custo = Integer.toString(n.intValue());
                 JPanel square = new JPanel();
                 switch(m[i][j].getStatusMapa()){
-                    case 0:
+                    case FLOOR:
                         square.setBackground(Color.WHITE);
                     break;
-                    case 1:
+                    case BARREIRA:
                         square.setBackground(Color.BLACK);
                     break;
-                    case 2:
+                    case PONTO_INICIAL:
                         square = new JPanel(){
                             @Override
                             protected void paintComponent(Graphics g) {
@@ -61,7 +61,7 @@ public class MapController {
                         };
                         square.setBackground(new Color(170, 23, 255));
                     break;
-                    case 3:
+                    case PONTO_FINAL:
                         square = new JPanel(){
                             @Override
                             protected void paintComponent(Graphics g) {
@@ -75,7 +75,7 @@ public class MapController {
                         };
                         square.setBackground(Color.RED);
                     break;
-                    case 4:
+                    case VERTICE_CONSIDERADO:
                         square = new JPanel(){
                             @Override
                             protected void paintComponent(Graphics g) {
@@ -89,7 +89,7 @@ public class MapController {
                         };
                         square.setBackground(Color.GRAY);
                     break;
-                    case 5:
+                    case VERTICE_VERIFICADO:
                         square = new JPanel(){
                             @Override
                             protected void paintComponent(Graphics g) {
@@ -103,7 +103,7 @@ public class MapController {
                         };
                         square.setBackground(new Color(23, 150, 255));
                     break;
-                    case 6:
+                    case CAMINHO_VERTICE:
                         square = new JPanel(){
                             @Override
                             protected void paintComponent(Graphics g) {

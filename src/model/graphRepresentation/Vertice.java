@@ -19,7 +19,8 @@ public class Vertice {
     private Vertice verticePai = null;
     private double custoCaminho = -1;
     private double custoG = 0;
-    private int statusMapa = 0;
+    public enum StatusMapa{FLOOR, BARREIRA, PONTO_INICIAL, PONTO_FINAL, VERTICE_CONSIDERADO, VERTICE_VERIFICADO, CAMINHO_VERTICE};
+    private StatusMapa statusMapa = StatusMapa.FLOOR;
     
     public Vertice(Point point, int id, String rotulo) {
         this.posicao = point;
@@ -55,7 +56,7 @@ public class Vertice {
         return visitado;
     }
 
-    public int getStatusMapa() {
+    public StatusMapa getStatusMapa() {
         return statusMapa;
     }
     
@@ -79,7 +80,7 @@ public class Vertice {
         this.custoCaminho = custoCaminho;
     }
 
-    public void setStatusMapa(int statusMapa) {
+    public void setStatusMapa(StatusMapa statusMapa) {
         this.statusMapa = statusMapa;
     }
 

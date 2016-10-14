@@ -252,7 +252,7 @@ public class WindowController {
         }else{
             this.starWindow.getTextAreaPath().setText("Caminho não Existe");
         }
-        this.mapController.getMapa().getVerticeInicial().setStatusMapa(2);
+        this.mapController.getMapa().getVerticeInicial().setStatusMapa(Vertice.StatusMapa.PONTO_INICIAL);
         this.mapController.pintarMapa();
         this.starWindow.getMapPanel().revalidate();
         this.mapController.getMapa().limparMapa();

@@ -29,6 +29,8 @@ public class MapaEstrela implements Runnable{
     private WindowController ctr;
     private boolean threadExecucao = false;
     
+    
+    
     public MapaEstrela(WindowController ctr) {
         this.ctr = ctr;
     }
@@ -68,9 +70,9 @@ public class MapaEstrela implements Runnable{
     public void limparMapa(){
         for (int i = 0; i < l; i++) {
             for (int j = 0; j < c; j++) {
-                if(this.mapa[i][j].getStatusMapa() != BARREIRA && this.mapa[i][j].getStatusMapa() != PONTO_INICIAL && this.mapa[i][j].getStatusMapa() != PONTO_FINAL){
-                    this.mapa[i][j].setStatusMapa(0);
-                }else if(this.mapa[i][j].getStatusMapa() == PONTO_INICIAL){
+                if(this.mapa[i][j].getStatusMapa() != Vertice.StatusMapa.BARREIRA && this.mapa[i][j].getStatusMapa() !=  Vertice.StatusMapa.PONTO_INICIAL && this.mapa[i][j].getStatusMapa() !=  Vertice.StatusMapa.PONTO_FINAL){
+                    this.mapa[i][j].setStatusMapa( Vertice.StatusMapa.FLOOR);
+                }else if(this.mapa[i][j].getStatusMapa() ==  Vertice.StatusMapa.PONTO_INICIAL){
                     this.buscaAStar.addListaAberta(this.mapa[i][j]);
                 }
             }
@@ -78,16 +80,16 @@ public class MapaEstrela implements Runnable{
     }
     
     public void setBarreira(int l, int c){
-        this.mapa[l][c].setStatusMapa(BARREIRA);
+        this.mapa[l][c].setStatusMapa(Vertice.StatusMapa.BARREIRA);
     }
     
     public void setPontoInicial(int l, int c){
-        this.mapa[l][c].setStatusMapa(PONTO_INICIAL);
+        this.mapa[l][c].setStatusMapa(Vertice.StatusMapa.PONTO_INICIAL);
         this.verticeInicial = this.mapa[l][c];
     }
     
     public void setPontoFinal(int l,  int c){
-        this.mapa[l][c].setStatusMapa(PONTO_FINAL);
+        this.mapa[l][c].setStatusMapa(Vertice.StatusMapa.PONTO_FINAL);
         this.verticeFinal = this.mapa[l][c];
     }
 
@@ -117,6 +119,10 @@ public class MapaEstrela implements Runnable{
 
     public boolean isThreadExecucao() {
         return threadExecucao;
+    }
+
+    public Vertice getVerticeFinal() {
+        return verticeFinal;
     }
 
 }

@@ -24,23 +24,23 @@ public class AStarStepByStep extends AlgoritmoAStar{
     @Override
     public boolean avaliarVizinho(Vertice vizinho, Vertice pai, double novoG) {
         double novoCusto = (10 * (Math.abs(vizinho.getPosicao().x - this.verticeFinal.getPosicao().x) + Math.abs(vizinho.getPosicao().y - this.verticeFinal.getPosicao().y))) + novoG + pai.getCustoG();
-        if(vizinho.getStatusMapa() == 0){
+        if(vizinho.getStatusMapa() == Vertice.StatusMapa.FLOOR){
             vizinho.setVerticePai(pai);
             vizinho.setCustoG(novoG + pai.getCustoG());
             vizinho.setCustoCaminho(novoCusto);
-            vizinho.setStatusMapa(4);
+            vizinho.setStatusMapa(Vertice.StatusMapa.VERTICE_CONSIDERADO);
             this.listaAberta.add(vizinho);
             this.mapaEstrela.getCtr().getMapController().pintarMapa();
             try {
                 this.mapaEstrela.getCtr().getMapController().getMapPainel().revalidate();
-                Thread.sleep(200);
+                Thread.sleep(100);
             } catch (InterruptedException ex) {
                 Logger.getLogger(AStarStepByStep.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             return false;
         }
-        if(vizinho.getStatusMapa() == 4 && novoCusto < vizinho.getCustoCaminho()){
+        if(vizinho.getStatusMapa() == Vertice.StatusMapa.VERTICE_CONSIDERADO && novoCusto < vizinho.getCustoCaminho()){
             this.listaAberta.remove(vizinho);
             vizinho.setVerticePai(pai);
             vizinho.setCustoG(novoG + pai.getCustoG());
@@ -49,14 +49,14 @@ public class AStarStepByStep extends AlgoritmoAStar{
             this.mapaEstrela.getCtr().getMapController().pintarMapa();
             try {
                 this.mapaEstrela.getCtr().getMapController().getMapPainel().revalidate();
-                Thread.sleep(200);
+                Thread.sleep(100);
             } catch (InterruptedException ex) {
                 Logger.getLogger(AStarStepByStep.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             return false;
         }
-        if(vizinho.getStatusMapa() == 3){
+        if(vizinho.getStatusMapa() == Vertice.StatusMapa.PONTO_FINAL){
             vizinho.setVerticePai(pai);
             vizinho.setCustoG(novoG + pai.getCustoG());
             vizinho.setCustoCaminho(novoCusto);
@@ -122,7 +122,14 @@ public class AStarStepByStep extends AlgoritmoAStar{
                 this.reproduzirCaminho();
                 return true;
             }
-            verticeAtual.setStatusMapa(5);
+            verticeAtual.setStatusMapa(Vertice.StatusMapa.VERTICE_VERIFICADO);
+            this.mapaEstrela.getCtr().getMapController().pintarMapa();
+            this.mapaEstrela.getCtr().getMapController().getMapPainel().revalidate();
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(AStarStepByStep.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return false;
     }
@@ -131,9 +138,9 @@ public class AStarStepByStep extends AlgoritmoAStar{
         this.caminho.add(verticeFinal);
         Vertice atual = verticeFinal.getVerticePai();
         while(atual != null){
-           atual.setStatusMapa(6);
+           atual.setStatusMapa(Vertice.StatusMapa.CAMINHO_VERTICE);
            if(atual.getVerticePai() == null){
-               atual.setStatusMapa(2);
+               atual.setStatusMapa(Vertice.StatusMapa.PONTO_INICIAL);
                break;
            }else{
                caminho.add(0, atual);
