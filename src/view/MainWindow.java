@@ -273,7 +273,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoIniciarAStarActionPerformed
 
     private void botaoPlanaridadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPlanaridadeActionPerformed
-        // TODO add your handling code here:
+        this.controller.iniciarTestePlanaridade();
     }//GEN-LAST:event_botaoPlanaridadeActionPerformed
 
     /**

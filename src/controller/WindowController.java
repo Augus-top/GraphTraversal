@@ -258,6 +258,14 @@ public class WindowController {
         this.mapController.getMapa().limparMapa();
     }
     
+    public void iniciarTestePlanaridade(){
+        if(this.grafoAtual.verificarPlanaridade()){
+            this.mainWindow.getTextAreaPath().setText("Grafo é Planar");
+        }else{
+            this.mainWindow.getTextAreaPath().setText("Grafo não é Planar");
+        }
+    }
+    
     public void retornarTelaPrincipal(){
         if(this.mapController.getMapa().isThreadExecucao()){
             return;

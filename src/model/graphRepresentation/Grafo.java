@@ -11,6 +11,7 @@ import model.graphAlgorithm.AlgoritmoBuscaCaminho;
 import model.graphAlgorithm.BreadthFirstSearch;
 import model.graphAlgorithm.DepthFirstSearch;
 import model.graphAlgorithm.DijkstraSearch;
+import model.graphAlgorithm.PlanarityChecker;
 
 /**
  *
@@ -26,6 +27,7 @@ public class Grafo {
     private ArrayList<Vertice> arrayVertice = new ArrayList<>();
     private double matrizAdjacencia[][];
     private AlgoritmoBuscaCaminho algoritmoBuscaCaminho;
+    private int numeroArestas = 0;
     
     public enum TipoBusca{DFS, BFS, DIJKSTRA}
     
@@ -42,6 +44,10 @@ public class Grafo {
     
     public void addAresta(int idVerticeA, int idVerticeB, double peso){
         this.matrizAdjacencia[idVerticeA][idVerticeB] = peso;
+        if(!this.dirigido){
+            this.matrizAdjacencia[idVerticeB][idVerticeA] = peso;
+        }
+        this.numeroArestas++;
     }
 
     public double verificarAdjacencia(int idVerticeA, int idVerticeB){
@@ -116,6 +122,11 @@ public class Grafo {
         return verticeVizinho;
     }
     
+    public boolean verificarPlanaridade(){
+        PlanarityChecker pc = new PlanarityChecker(this);
+        return pc.definirPlanaridade();
+    }
+    
     public ArrayList<Vertice> getArrayVertice() {
         return arrayVertice;
     }
@@ -170,6 +181,9 @@ public class Grafo {
             break;
         }
     }
-    
+
+    public int getNumeroArestas() {
+        return numeroArestas;
+    }
     
 }
