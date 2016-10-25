@@ -113,7 +113,7 @@ public class Vertice {
                 this.corVertice = Color.ORANGE;
             break;
             case 5:
-                this.corVertice = Color.PINK;
+                this.corVertice = new Color(253, 176, 238);
             break;
             case 6:
                 this.corVertice = new Color(241, 240, 159);
