@@ -101,28 +101,28 @@ public class Vertice {
     public void setCorVertice(int corVertice) {
         switch(corVertice){
             case 1:
-                this.corVertice = Color.RED;
+                this.corVertice = new Color(247, 130, 105);
             break;
             case 2:
-                this.corVertice = Color.BLUE;
+                this.corVertice = Color.CYAN;
             break;
             case 3:
-                this.corVertice = Color.YELLOW;
+                this.corVertice = new Color(173, 255, 113);
             break;
             case 4:
-                this.corVertice = Color.GREEN;
-            break;
-            case 5:
                 this.corVertice = Color.ORANGE;
             break;
-            case 6:
+            case 5:
                 this.corVertice = Color.PINK;
+            break;
+            case 6:
+                this.corVertice = Color.YELLOW;
             break;
             case 7:
                 this.corVertice = new Color(167, 50 ,255);
             break;
             case 8:
-                this.corVertice = Color.CYAN;
+                this.corVertice = new Color(124, 165, 243);
             break;
             case 9:
                 this.corVertice = Color.WHITE;
