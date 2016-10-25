@@ -25,7 +25,7 @@ public class Coloracao {
     
     private boolean verificarCorVizinhaVisitada(ArrayList<Color> cores, Color corVizinho){
         for (Color cor : cores) {
-            if(corVizinho == cor){
+            if(corVizinho.getRGB() == cor.getRGB()){
                 return true;
             }
         }
@@ -79,7 +79,10 @@ public class Coloracao {
             verticeAtual.setCorVertice(i);
             corValida = true;
             for (Vertice vizinho : vizinhos) {
-                if(vizinho.getCorVertice() == verticeAtual.getCorVertice()){
+                if(vizinho.getCorVertice() == null){
+                    continue;
+                }
+                if(vizinho.getCorVertice().getRGB() == verticeAtual.getCorVertice().getRGB()){
                     corValida = false;
                     break;
                 }
