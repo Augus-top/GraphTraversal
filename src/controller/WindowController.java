@@ -41,6 +41,9 @@ public class WindowController {
     }
     
     public void iniciarImportacaoXML(){
+        if(this.grafoAtual != null && this.grafoAtual.isThreadExecucao()){
+            return;
+        }
         try{
             JFileChooser fileChooser = new JFileChooser(JFileChooserController.getLastDirectory());
             FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("Arquivo XML", "xml");
@@ -104,7 +107,7 @@ public class WindowController {
     }
     
     public void iniciarBuscaCaminhoGrafo(){
-        if(this.grafoAtual == null){
+        if(this.grafoAtual == null || this.grafoAtual.isThreadExecucao()){
             return;
         }
         String rotuloA = this.mainWindow.getComboBoxVerticeInicial().getSelectedItem().toString();
@@ -178,6 +181,9 @@ public class WindowController {
     }
     
     public void iniciarAStar(){
+        if(this.grafoAtual != null && this.grafoAtual.isThreadExecucao()){
+            return;
+        }
         this.starWindow = new AStarWindow(this);
         this.mapController = new MapController(this.starWindow.getMapPanel(), this);
         this.starWindow.setSize(1100, 620);
@@ -259,7 +265,7 @@ public class WindowController {
     }
     
     public void iniciarTestePlanaridade(){
-        if(this.grafoAtual == null){
+        if(this.grafoAtual == null || this.grafoAtual.isThreadExecucao()){
             return;
         }
         if(this.grafoAtual.verificarPlanaridade()){
@@ -270,12 +276,16 @@ public class WindowController {
     }
     
     public void iniciarColoracao(){
-        if(this.grafoAtual == null){
+        if(this.grafoAtual == null || this.grafoAtual.isThreadExecucao()){
             return;
         }
+        this.mainWindow.getTextAreaPath().setText("");
         this.grafoAtual.setCaminhoNull();
         this.grafoAtual.prepararMatrizColoracao();
-        int numeroCromatico = this.grafoAtual.realizarColoracao();
+        this.grafoAtual.realizarColoracao();
+    }
+    
+    public void terminarColoracao(int numeroCromatico){
         this.grafoAtual.repararMatrizColoracao();
         this.mainWindow.getTextAreaPath().setText("Número Cromático: " + numeroCromatico);
         if(numeroCromatico > 12){
@@ -295,5 +305,9 @@ public class WindowController {
 
     public MapController getMapController() {
         return mapController;
+    }
+
+    public GraphController getGraphController() {
+        return graphController;
     }
 }

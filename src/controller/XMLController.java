@@ -8,17 +8,13 @@ package controller;
 import java.awt.Point;
 import model.graphRepresentation.Grafo;
 import java.io.File;
-import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import model.graphRepresentation.MapaEstrela;
-import model.graphRepresentation.Vertice;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -41,7 +37,7 @@ public class XMLController {
 
         Node grafoNode = grafoInfo.item(0);
         Element elementGrafo = (Element) grafoNode;
-        Grafo grafo = new Grafo(Boolean.parseBoolean(elementGrafo.getAttribute("ponderado")), Boolean.parseBoolean(elementGrafo.getAttribute("dirigido")), nodes.getLength());
+        Grafo grafo = new Grafo(Boolean.parseBoolean(elementGrafo.getAttribute("ponderado")), Boolean.parseBoolean(elementGrafo.getAttribute("dirigido")), nodes.getLength(), this.windowController);
         
         if (nodes.getLength() == 0) {
             throw new Exception("Erro no XML");

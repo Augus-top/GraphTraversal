@@ -5,6 +5,7 @@
  */
 package model.graphRepresentation;
 
+import controller.WindowController;
 import java.awt.Point;
 import java.util.ArrayList;
 import model.graphAlgorithm.AlgoritmoBuscaCaminho;
@@ -30,13 +31,16 @@ public class Grafo {
     private double matrizAdjacenciaVelha[][];
     private AlgoritmoBuscaCaminho algoritmoBuscaCaminho;
     private int numeroArestas = 0;
+    private boolean threadExecucao = false;
+    private WindowController controller;
     
     public enum TipoBusca{DFS, BFS, DIJKSTRA}
     
-    public Grafo(boolean ponderado, boolean dirigido, int numeroVertice) {
+    public Grafo(boolean ponderado, boolean dirigido, int numeroVertice, WindowController ctr) {
         this.ponderado = ponderado;
         this.dirigido = dirigido;
         matrizAdjacencia = new double[numeroVertice][numeroVertice];
+        this.controller = ctr;
     }
     
     public void addVertice(Point point, int id, String rotulo){
@@ -129,10 +133,13 @@ public class Grafo {
         return pc.definirPlanaridade();
     }
     
-    public int realizarColoracao(){
-        Coloracao graphColoring = new Coloracao(this);
-        int numeroCromatico = graphColoring.definirColoracao();
-        return numeroCromatico;
+    public void realizarColoracao(){
+        Thread t = new Thread(new Coloracao(this));
+        t.start();
+    }
+    
+    public void finalizarColoracao(int numeroCromatico){
+        this.controller.terminarColoracao(numeroCromatico);
     }
     
     public void limparColoracao(){
@@ -252,5 +259,17 @@ public class Grafo {
     
     public void setCaminhoNull(){
         this.algoritmoBuscaCaminho = null;
+    }
+
+    public boolean isThreadExecucao() {
+        return threadExecucao;
+    }
+
+    public void setThreadExecucao(boolean threadExecucao) {
+        this.threadExecucao = threadExecucao;
+    }
+
+    public WindowController getController() {
+        return controller;
     }
 }

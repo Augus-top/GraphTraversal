@@ -7,6 +7,8 @@ package model.graphAlgorithm;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.graphRepresentation.Grafo;
 import model.graphRepresentation.Vertice;
 
@@ -14,13 +16,21 @@ import model.graphRepresentation.Vertice;
  *
  * @author Augustop
  */
-public class Coloracao {
+public class Coloracao implements Runnable{
     private Grafo grafo;
     private int numeroCromatico = 1;
     private int ultimaCorSaturacao;
     
     public Coloracao(Grafo grafo) {
         this.grafo = grafo;
+    }
+
+    @Override
+    public void run(){
+        this.grafo.setThreadExecucao(true);
+        this.definirColoracao();
+        this.grafo.setThreadExecucao(false);
+        this.grafo.finalizarColoracao(this.numeroCromatico);
     }
     
     private boolean verificarCorVizinhaVisitada(ArrayList<Color> cores, Color corVizinho){
@@ -77,6 +87,12 @@ public class Coloracao {
         ArrayList<Vertice> vizinhos = this.grafo.getVizinhosVertice(verticeAtual);
         for(int i = 1; i <= numeroCromatico; i++){
             verticeAtual.setCorVertice(i);
+            try {
+                this.grafo.getController().getGraphController().desenharGrafo();
+                Thread.sleep(300);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Coloracao.class.getName()).log(Level.SEVERE, null, ex);
+            }
             corValida = true;
             for (Vertice vizinho : vizinhos) {
                 if(vizinho.getCorVertice() == null){
@@ -95,6 +111,12 @@ public class Coloracao {
     
     public int definirColoracao(){
         this.grafo.getVerticeMaiorGrau().setCorVertice(1);
+        try {
+            this.grafo.getController().getGraphController().desenharGrafo();
+            Thread.sleep(300);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Coloracao.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Vertice verticeAtual = null;
         while(true){
             verticeAtual = this.selecionarVerticeMaiorGrauSaturacao();
@@ -104,10 +126,21 @@ public class Coloracao {
             if(ultimaCorSaturacao == numeroCromatico){
                 numeroCromatico++;
                 verticeAtual.setCorVertice(this.numeroCromatico);
+                try {
+                    this.grafo.getController().getGraphController().desenharGrafo();
+                    Thread.sleep(400);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Coloracao.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 this.definirNovaCor(verticeAtual);
             }
         }
         return numeroCromatico;
     }
+
+    public int getNumeroCromatico() {
+        return numeroCromatico;
+    }
+
 }
