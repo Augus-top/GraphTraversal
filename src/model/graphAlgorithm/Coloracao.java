@@ -20,9 +20,11 @@ public class Coloracao implements Runnable{
     private Grafo grafo;
     private int numeroCromatico = 1;
     private int ultimaCorSaturacao;
+    private int delay;
     
-    public Coloracao(Grafo grafo) {
+    public Coloracao(Grafo grafo, int delay) {
         this.grafo = grafo;
+        this.delay = delay;
     }
 
     @Override
@@ -89,7 +91,7 @@ public class Coloracao implements Runnable{
             verticeAtual.setCorVertice(i);
             try {
                 this.grafo.getController().getGraphController().desenharGrafo();
-                Thread.sleep(300);
+                Thread.sleep(delay);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Coloracao.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -113,7 +115,7 @@ public class Coloracao implements Runnable{
         this.grafo.getVerticeMaiorGrau().setCorVertice(1);
         try {
             this.grafo.getController().getGraphController().desenharGrafo();
-            Thread.sleep(300);
+            Thread.sleep(delay);
         } catch (InterruptedException ex) {
             Logger.getLogger(Coloracao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -128,7 +130,7 @@ public class Coloracao implements Runnable{
                 verticeAtual.setCorVertice(this.numeroCromatico);
                 try {
                     this.grafo.getController().getGraphController().desenharGrafo();
-                    Thread.sleep(400);
+                    Thread.sleep(delay + 100);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Coloracao.class.getName()).log(Level.SEVERE, null, ex);
                 }

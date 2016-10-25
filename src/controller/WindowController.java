@@ -279,10 +279,19 @@ public class WindowController {
         if(this.grafoAtual == null || this.grafoAtual.isThreadExecucao()){
             return;
         }
+        int delay;
+        try{
+            delay = Integer.parseInt(this.mainWindow.getInputDelay().getText());
+            if(delay < 1 || delay > 9999){
+                delay = 300;
+            }
+        }catch(Exception e){
+            delay = 300;
+        }
         this.mainWindow.getTextAreaPath().setText("");
         this.grafoAtual.setCaminhoNull();
         this.grafoAtual.prepararMatrizColoracao();
-        this.grafoAtual.realizarColoracao();
+        this.grafoAtual.realizarColoracao(delay);
     }
     
     public void terminarColoracao(int numeroCromatico){

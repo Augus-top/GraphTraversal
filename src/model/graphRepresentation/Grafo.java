@@ -133,8 +133,8 @@ public class Grafo {
         return pc.definirPlanaridade();
     }
     
-    public void realizarColoracao(){
-        Thread t = new Thread(new Coloracao(this));
+    public void realizarColoracao(int delay){
+        Thread t = new Thread(new Coloracao(this, delay));
         t.start();
     }
     
