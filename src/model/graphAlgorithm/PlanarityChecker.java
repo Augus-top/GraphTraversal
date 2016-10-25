@@ -47,6 +47,7 @@ public class PlanarityChecker {
         if(this.grafo.getNumeroVertices() < 3){
             return true;
         }
+        System.out.println(this.grafo.getNumeroArestas() + ", " + (3 * this.grafo.getNumeroVertices() - 6));
         if(this.grafo.getNumeroArestas() <= 3 * this.grafo.getNumeroVertices() - 6){
             if(this.verificarCiclo(3)){
                 return true;

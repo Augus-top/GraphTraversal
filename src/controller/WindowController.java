@@ -34,7 +34,7 @@ public class WindowController {
     
     public WindowController() {
         this.mainWindow = new MainWindow(this);
-        this.mainWindow.setSize(1100, 620);
+        this.mainWindow.setSize(1125, 623);
         this.mainWindow.setLocationRelativeTo(null);
         this.mainWindow.setVisible(true);
         this.mainWindow.requestFocusInWindow();
@@ -259,6 +259,9 @@ public class WindowController {
     }
     
     public void iniciarTestePlanaridade(){
+        if(this.grafoAtual == null){
+            return;
+        }
         if(this.grafoAtual.verificarPlanaridade()){
             this.mainWindow.getTextAreaPath().setText("Grafo é Planar");
         }else{
@@ -266,8 +269,20 @@ public class WindowController {
         }
     }
     
+    public void iniciarColoracao(){
+        if(this.grafoAtual == null){
+            return;
+        }
+        this.grafoAtual.prepararMatrizColoracao();
+        int numeroCromatico = this.grafoAtual.realizarColoracao();
+        this.grafoAtual.repararMatrizColoracao();
+        this.mainWindow.getTextAreaPath().setText("Número Cromático: " + numeroCromatico);
+        this.graphController.desenharGrafo();
+        this.grafoAtual.limparColoracao();
+    }
+    
     public void retornarTelaPrincipal(){
-        if(this.mapController.getMapa().isThreadExecucao()){
+        if(this.mapController.getMapa() != null && this.mapController.getMapa().isThreadExecucao()){
             return;
         }
         this.mainWindow.setVisible(true);

@@ -49,6 +49,8 @@ public class MainWindow extends javax.swing.JFrame {
         this.setButtonColor(this.botaoImportarXML, Color.WHITE, Color.WHITE, Color.BLACK, Color.RED, Color.DARK_GRAY, Color.RED);
         this.setButtonColor(this.botaoIniciarAStar, Color.WHITE, Color.WHITE, Color.BLACK, Color.RED, Color.DARK_GRAY, Color.RED);
         this.setButtonColor(this.botaoPlanaridade, Color.WHITE, Color.WHITE, Color.BLACK, Color.RED, Color.DARK_GRAY, Color.RED);
+        this.setButtonColor(this.botaoColoracao, Color.WHITE, Color.WHITE, Color.BLACK, Color.RED, Color.DARK_GRAY, Color.RED);
+        
         URL urlIcon = getClass().getResource("/kancolle_icon.png");
         Image frameIcon = null;
         try {
@@ -84,7 +86,6 @@ public class MainWindow extends javax.swing.JFrame {
         comboBoxVerticeInicial = new javax.swing.JComboBox();
         labelVerticeFinal = new javax.swing.JLabel();
         comboBoxVerticeFinal = new javax.swing.JComboBox();
-        labelAlgoritmo = new javax.swing.JLabel();
         radioButtonDFS = new javax.swing.JRadioButton();
         radioButtonDijkstra = new javax.swing.JRadioButton();
         radioButtonBFS = new javax.swing.JRadioButton();
@@ -95,6 +96,7 @@ public class MainWindow extends javax.swing.JFrame {
         botaoBuscarCaminho = new com.alee.laf.button.WebButton();
         botaoIniciarAStar = new com.alee.laf.button.WebButton();
         botaoPlanaridade = new com.alee.laf.button.WebButton();
+        botaoColoracao = new com.alee.laf.button.WebButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Caminho em Grafos");
@@ -115,9 +117,6 @@ public class MainWindow extends javax.swing.JFrame {
                 comboBoxVerticeFinalActionPerformed(evt);
             }
         });
-
-        labelAlgoritmo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        labelAlgoritmo.setText("Algoritmo:");
 
         radioButtonAlgorithmGroup.add(radioButtonDFS);
         radioButtonDFS.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -172,6 +171,13 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        botaoColoracao.setText("Coloração");
+        botaoColoracao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoColoracaoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -196,19 +202,19 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(labelAlgoritmo)
+                        .addComponent(botaoPlanaridade, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoColoracao, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoBuscarCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(radioButtonDijkstra)
                             .addComponent(radioButtonBFS)
                             .addComponent(radioButtonDFS))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(botaoPlanaridade, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botaoBuscarCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8))))
-            .addComponent(graphPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
+                        .addGap(25, 25, 25))))
+            .addComponent(graphPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,9 +223,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 2, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(labelVerticeInicial)
                                     .addComponent(comboBoxVerticeInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -230,9 +236,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(radioButtonDFS)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(radioButtonBFS)
-                                    .addComponent(labelAlgoritmo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(radioButtonBFS)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(radioButtonDijkstra)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -242,7 +246,8 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addComponent(botaoIniciarAStar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(botaoBuscarCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(botaoPlanaridade, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(botaoPlanaridade, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(botaoColoracao, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(27, 27, 27))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -275,6 +280,10 @@ public class MainWindow extends javax.swing.JFrame {
     private void botaoPlanaridadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPlanaridadeActionPerformed
         this.controller.iniciarTestePlanaridade();
     }//GEN-LAST:event_botaoPlanaridadeActionPerformed
+
+    private void botaoColoracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoColoracaoActionPerformed
+        this.controller.iniciarColoracao();
+    }//GEN-LAST:event_botaoColoracaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -313,6 +322,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.alee.laf.button.WebButton botaoBuscarCaminho;
+    private com.alee.laf.button.WebButton botaoColoracao;
     private com.alee.laf.button.WebButton botaoImportarXML;
     private com.alee.laf.button.WebButton botaoIniciarAStar;
     private com.alee.laf.button.WebButton botaoPlanaridade;
@@ -320,7 +330,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox comboBoxVerticeInicial;
     private javax.swing.JPanel graphPanel;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labelAlgoritmo;
     private javax.swing.JLabel labelVerticeFinal;
     private javax.swing.JLabel labelVerticeInicial;
     private javax.swing.ButtonGroup radioButtonAlgorithmGroup;

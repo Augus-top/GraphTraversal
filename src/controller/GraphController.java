@@ -32,6 +32,13 @@ public class GraphController {
         this.graphPanel = graphPanel;
     }
 
+    private Color definirCorVertice(Vertice v){
+        if(v.getCorVertice() == null){
+            return Color.YELLOW;
+        }
+        return v.getCorVertice();
+    }
+    
     public void desenharGrafo(){
         this.graphPanel.removeAll();
         Point minPoint = this.getMaxMinPoint(-1);
@@ -83,7 +90,7 @@ public class GraphController {
             }
         }
         for (Vertice v: this.grafo.getArrayVertice()) {
-            g.setColor(Color.YELLOW);
+            g.setColor(this.definirCorVertice(v));
             g.fillOval(v.getPosicao().x - this.radiusVertice / 2, v.getPosicao().y - this.radiusVertice / 2, this.radiusVertice, this.radiusVertice);
             g.setColor(Color.BLACK);
             g.drawOval(v.getPosicao().x - this.radiusVertice / 2, v.getPosicao().y - this.radiusVertice / 2, this.radiusVertice, this.radiusVertice);

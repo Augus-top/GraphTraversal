@@ -9,6 +9,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import model.graphAlgorithm.AlgoritmoBuscaCaminho;
 import model.graphAlgorithm.BreadthFirstSearch;
+import model.graphAlgorithm.Coloracao;
 import model.graphAlgorithm.DepthFirstSearch;
 import model.graphAlgorithm.DijkstraSearch;
 import model.graphAlgorithm.PlanarityChecker;
@@ -26,6 +27,7 @@ public class Grafo {
     private boolean conexo = false;
     private ArrayList<Vertice> arrayVertice = new ArrayList<>();
     private double matrizAdjacencia[][];
+    private double matrizAdjacenciaVelha[][];
     private AlgoritmoBuscaCaminho algoritmoBuscaCaminho;
     private int numeroArestas = 0;
     
@@ -127,6 +129,18 @@ public class Grafo {
         return pc.definirPlanaridade();
     }
     
+    public int realizarColoracao(){
+        Coloracao graphColoring = new Coloracao(this);
+        int numeroCromatico = graphColoring.definirColoracao();
+        return numeroCromatico;
+    }
+    
+    public void limparColoracao(){
+        for (Vertice v : arrayVertice) {
+            v.setCorVertice(null);
+        }
+    }
+    
     public ArrayList<Vertice> getArrayVertice() {
         return arrayVertice;
     }
@@ -181,9 +195,58 @@ public class Grafo {
             break;
         }
     }
+    
+    public Vertice getVerticeMaiorGrau(){
+        int id = 0;
+        int maiorGrau = 0;
+        int grauAtual;
+        for (Vertice v : arrayVertice) {
+            grauAtual = 0;
+            for (int i = 0; i < this.getNumeroVertices(); i++) {
+                if(this.matrizAdjacencia[v.getId()][i] > 0){
+                    grauAtual++;
+                }
+            }
+            if(grauAtual >= maiorGrau){
+                if(maiorGrau != 0 && grauAtual == maiorGrau){
+                    if(v.getRotulo().compareTo(this.arrayVertice.get(id).getRotulo()) > 0){
+                        continue;
+                    }
+                }
+                maiorGrau = grauAtual;
+                id = v.getId();
+            }
+        }
+        return this.arrayVertice.get(id);
+    }
 
     public int getNumeroArestas() {
         return numeroArestas;
     }
     
+    public void prepararMatrizColoracao(){
+        if(!dirigido){
+            return;
+        }
+        this.matrizAdjacenciaVelha = new double[this.arrayVertice.size()][this.arrayVertice.size()];
+        for (int i = 0; i < this.arrayVertice.size(); i++) {
+            for (int j = 0; j < this.arrayVertice.size(); j++) {
+                this.matrizAdjacenciaVelha[i][j] = this.matrizAdjacencia[i][j];
+            }
+        }
+        for (int i = 0; i < this.arrayVertice.size(); i++) {
+            for (int j = 0; j < this.arrayVertice.size(); j++) {
+                if(this.matrizAdjacencia[i][j] > 0){
+                    this.matrizAdjacencia[j][i] = this.matrizAdjacencia[i][j];
+                }
+            }
+        }
+    }
+    
+    public void repararMatrizColoracao(){
+        if(!dirigido){
+            return;
+        }
+        this.matrizAdjacencia = this.matrizAdjacenciaVelha;
+    }
 }
