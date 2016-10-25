@@ -273,10 +273,14 @@ public class WindowController {
         if(this.grafoAtual == null){
             return;
         }
+        this.grafoAtual.setCaminhoNull();
         this.grafoAtual.prepararMatrizColoracao();
         int numeroCromatico = this.grafoAtual.realizarColoracao();
         this.grafoAtual.repararMatrizColoracao();
         this.mainWindow.getTextAreaPath().setText("Número Cromático: " + numeroCromatico);
+        if(numeroCromatico > 12){
+            this.mainWindow.getTextAreaPath().append("\nNúmero ultrapassou o limite de cores disponíveis (12)");
+        }
         this.graphController.desenharGrafo();
         this.grafoAtual.limparColoracao();
     }

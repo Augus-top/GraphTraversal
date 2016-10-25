@@ -249,4 +249,8 @@ public class Grafo {
         }
         this.matrizAdjacencia = this.matrizAdjacenciaVelha;
     }
+    
+    public void setCaminhoNull(){
+        this.algoritmoBuscaCaminho = null;
+    }
 }
