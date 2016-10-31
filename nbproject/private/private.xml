@@ -10,7 +10,6 @@
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/AlgoritmoAStar.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/launcher/Launcher.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/DepthFirstSearch.java</file>
-            <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/PlanarityChecker.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/controller/JFileChooserController.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/ComparadorVerticesRotulo.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphRepresentation/MapaEstrela.java</file>
@@ -24,6 +23,7 @@
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/AStar.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/controller/XMLController.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/DijkstraSearch.java</file>
+            <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/Coloracao.java</file>
         </group>
     </open-files>
 </project-private>

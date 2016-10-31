@@ -34,10 +34,11 @@ public class WindowController {
     
     public WindowController() {
         this.mainWindow = new MainWindow(this);
-        this.mainWindow.setSize(1125, 623);
+        this.mainWindow.setSize(this.mainWindow.getPreferredSize());
         this.mainWindow.setLocationRelativeTo(null);
         this.mainWindow.setVisible(true);
         this.mainWindow.requestFocusInWindow();
+        System.out.println(10 % (-2));
     }
     
     public void iniciarImportacaoXML(){
@@ -262,17 +263,6 @@ public class WindowController {
         this.mapController.pintarMapa();
         this.starWindow.getMapPanel().revalidate();
         this.mapController.getMapa().limparMapa();
-    }
-    
-    public void iniciarTestePlanaridade(){
-        if(this.grafoAtual == null || this.grafoAtual.isThreadExecucao()){
-            return;
-        }
-        if(this.grafoAtual.verificarPlanaridade()){
-            this.mainWindow.getTextAreaPath().setText("Grafo é Planar");
-        }else{
-            this.mainWindow.getTextAreaPath().setText("Grafo não é Planar");
-        }
     }
     
     public void iniciarColoracao(){

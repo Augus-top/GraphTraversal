@@ -13,7 +13,6 @@ import model.graphAlgorithm.BreadthFirstSearch;
 import model.graphAlgorithm.Coloracao;
 import model.graphAlgorithm.DepthFirstSearch;
 import model.graphAlgorithm.DijkstraSearch;
-import model.graphAlgorithm.PlanarityChecker;
 
 /**
  *
@@ -89,6 +88,10 @@ public class Grafo {
                 if(this.algoritmoBuscaCaminho.buscarCaminho(i, j) == null){
                     return this.conexo;
                 }
+                this.limparCaminho();
+                if(this.algoritmoBuscaCaminho.buscarCaminho(j, i) == null){
+                    return this.conexo;
+                }
             }
         }
         this.conexo = true;
@@ -126,11 +129,6 @@ public class Grafo {
             }
         }
         return verticeVizinho;
-    }
-    
-    public boolean verificarPlanaridade(){
-        PlanarityChecker pc = new PlanarityChecker(this);
-        return pc.definirPlanaridade();
     }
     
     public void realizarColoracao(int delay){
