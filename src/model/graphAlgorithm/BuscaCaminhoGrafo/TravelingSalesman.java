@@ -52,6 +52,9 @@ public class TravelingSalesman extends AlgoritmoBuscaCaminho{
     public ArrayList<Vertice> buscarCaminho(int idVerticeA, int idVerticeB) {
         this.caminhoGrafo = new ArrayList<>();
         this.encontrarSubCicloInicial();
+        for (Vertice caminhoGrafo1 : caminhoGrafo) {
+            System.out.println(caminhoGrafo1.getRotulo());
+        }
         double custoCorrente;
         double novoCusto;
         int indice1 = 0;
@@ -64,8 +67,18 @@ public class TravelingSalesman extends AlgoritmoBuscaCaminho{
                     if(v.isVisitado()){
                         continue;
                     }
-                    if(matrizGrafo[this.caminhoGrafo.get(i).getId()][v.getId()] > -1 && matrizGrafo[v.getId()][this.caminhoGrafo.get(i + 1).getId()] > -1){
+//                    if(this.caminhoGrafo.size() == 3 && matrizGrafo[this.caminhoGrafo.get(i).getId()][v.getId()] > -1){
+//                        novoCusto = matrizGrafo[this.caminhoGrafo.get(i).getId()][v.getId()] - this.caminhoGrafo.get(i + 1).getCustoCaminho();
+//                        System.out.println(v.getRotulo() + " - " + novoCusto);
+//                        if(custoCorrente > novoCusto){
+//                            custoCorrente = novoCusto;
+//                            indice1 = i;
+//                            indice2 = v.getId();
+//                        }
+//                    }
+                    else if(matrizGrafo[this.caminhoGrafo.get(i).getId()][v.getId()] > -1 && matrizGrafo[v.getId()][this.caminhoGrafo.get(i + 1).getId()] > -1){
                         novoCusto = matrizGrafo[this.caminhoGrafo.get(i).getId()][v.getId()] + matrizGrafo[v.getId()][this.caminhoGrafo.get(i + 1).getId()] - this.caminhoGrafo.get(i + 1).getCustoCaminho();
+                        System.out.println(v.getRotulo() + " - " + novoCusto);
                         if(custoCorrente > novoCusto){
                             custoCorrente = novoCusto;
                             indice1 = i;
@@ -86,6 +99,7 @@ public class TravelingSalesman extends AlgoritmoBuscaCaminho{
             this.caminhoGrafo.add(indice1 + 1, novoVerticeCaminho);
             this.custoCaminho += custoCorrente;
             System.out.println(this.custoCaminho);
+            System.out.println(novoVerticeCaminho.getRotulo());
 //            for (Vertice v : this.caminhoGrafo) {
 //                System.out.print(v.getRotulo() + " -> ");
 //            }
