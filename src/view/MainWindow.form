@@ -68,7 +68,7 @@
                           <Component id="radioButtonDijkstra" min="-2" max="-2" attributes="0"/>
                           <Component id="radioButtonBFS" min="-2" max="-2" attributes="0"/>
                           <Component id="radioButtonDFS" min="-2" max="-2" attributes="0"/>
-                          <Component id="radioButtonDijkstra1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="radioButtonTraveling" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -103,8 +103,8 @@
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="radioButtonDijkstra1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="10" max="32767" attributes="0"/>
+                              <Component id="radioButtonTraveling" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -117,7 +117,6 @@
                                   <Component id="labelVerticeFinal" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="comboBoxVerticeFinal" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -302,7 +301,7 @@
         <Property name="text" type="java.lang.String" value="300"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="radioButtonDijkstra1">
+    <Component class="javax.swing.JRadioButton" name="radioButtonTraveling">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="radioButtonAlgorithmGroup"/>

@@ -8,6 +8,8 @@ package controller;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 import com.bethecoder.ascii_table.ASCIITable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import model.graphRepresentation.Grafo;
 import view.MainWindow;
@@ -38,7 +40,6 @@ public class WindowController {
         this.mainWindow.setLocationRelativeTo(null);
         this.mainWindow.setVisible(true);
         this.mainWindow.requestFocusInWindow();
-        System.out.println(10 % (-2));
     }
     
     public void iniciarImportacaoXML(){
@@ -100,9 +101,6 @@ public class WindowController {
                 if(this.grafoAtual.getVertice(i).getId() == this.grafoAtual.getVertice(j).getId()){
                     throw new Exception();
                 }
-                if(this.grafoAtual.getPeso(i, j) < 0){
-                    throw new Exception();
-                }
             }
         }
     }
@@ -123,6 +121,19 @@ public class WindowController {
             this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.BFS);
         }else if(this.mainWindow.getRadioButtonDijkstra().isSelected()){
             this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.DIJKSTRA);
+        }else if(this.mainWindow.getRadioButtonTraveling().isSelected()){
+            if(!this.grafoAtual.verificarGrafoConexo()){
+                this.mainWindow.getTextAreaPath().setText("Grafo não conexo! Não é possível executar o Caixeiro Viajante");
+                this.grafoAtual.limparCaminho();
+                return;
+            }else if(!this.grafoAtual.isPonderado()){
+                this.mainWindow.getTextAreaPath().setText("Grafo não é ponderado! Não é possível executar o Caixeiro Viajante");
+                return;
+            }else if(this.grafoAtual.isDirigido()){
+                this.mainWindow.getTextAreaPath().setText("Grafo é dirigido! Não é possível executar o Caixeiro Viajante");
+                return;
+            }
+            this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.TSP);
         }else{
             return;
         }
@@ -135,20 +146,26 @@ public class WindowController {
         if(caminho == null){
             this.mainWindow.getTextAreaPath().append("Caminho Não Existe\n");
         }else{
-            for (Vertice caminho1 : caminho) {
-                this.mainWindow.getTextAreaPath().append(caminho1.getRotulo());
-                if(caminho1.getId() != caminho.get(caminho.size() - 1).getId()){
+            for (int i = 0; i < caminho.size(); i++) {
+                this.mainWindow.getTextAreaPath().append(caminho.get(i).getRotulo());
+                if(i != caminho.size() - 1){
                     this.mainWindow.getTextAreaPath().append(" -> ");
                 }
+            }
+            if(this.mainWindow.getRadioButtonTraveling().isSelected()){
+                this.mainWindow.getTextAreaPath().append("\nCusto total do caminho: " + caminho.get(caminho.size() - 1).getCustoCaminho());
             }
         }
         if(this.mainWindow.getRadioButtonDijkstra().isSelected()){
             pintarTabelaDijkstra();
         }
         this.graphController.desenharGrafo();
-        this.definirGrafoConexo();
+        if(!this.mainWindow.getRadioButtonTraveling().isSelected()){
+            this.definirGrafoConexo();
+        }
         this.grafoAtual.limparCaminho();
     }
+    
     
     private void pintarTabelaDijkstra(){
         String[] header = new String[grafoAtual.getNumeroVertices() + 1];

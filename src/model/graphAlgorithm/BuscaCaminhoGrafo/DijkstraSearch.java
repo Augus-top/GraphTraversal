@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.graphAlgorithm;
+package model.graphAlgorithm.BuscaCaminhoGrafo;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import model.graphAlgorithm.ComparadorVerticesCusto;
 import model.graphRepresentation.Grafo;
 import model.graphRepresentation.Vertice;
 

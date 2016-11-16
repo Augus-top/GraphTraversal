@@ -6,23 +6,24 @@
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/controller/WindowController.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/view/AStarWindow.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/view/MainWindow.java</file>
-            <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/BreadthFirstSearch.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/AlgoritmoAStar.java</file>
+            <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/BuscaCaminhoGrafo/AlgoritmoBuscaCaminho.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/launcher/Launcher.java</file>
-            <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/DepthFirstSearch.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/controller/JFileChooserController.java</file>
+            <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/BuscaCaminhoGrafo/DijkstraSearch.java</file>
+            <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/BuscaCaminhoGrafo/DepthFirstSearch.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/ComparadorVerticesRotulo.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphRepresentation/MapaEstrela.java</file>
+            <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/BuscaCaminhoGrafo/BreadthFirstSearch.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/AStarStepByStep.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/controller/GraphController.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/controller/MapController.java</file>
-            <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/AlgoritmoBuscaCaminho.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphRepresentation/Vertice.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphRepresentation/Grafo.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/ComparadorVerticesCusto.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/AStar.java</file>
+            <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/BuscaCaminhoGrafo/TravelingSalesman.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/controller/XMLController.java</file>
-            <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/DijkstraSearch.java</file>
             <file>file:/C:/Augustop/Programming/GraphTraversal/src/model/graphAlgorithm/Coloracao.java</file>
         </group>
     </open-files>

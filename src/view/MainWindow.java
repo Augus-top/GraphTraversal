@@ -60,6 +60,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
         this.setIconImage(frameIcon.getScaledInstance(32, 32, Image.SCALE_SMOOTH));
         this.repaint();
+        this.radioButtonTraveling.setSelected(true);
     }
 
     private void setButtonColor(com.alee.laf.button.WebButton b, Color fore, Color selFor, Color top, Color topSel, Color bot, Color botSel){
@@ -98,7 +99,7 @@ public class MainWindow extends javax.swing.JFrame {
         botaoColoracao = new com.alee.laf.button.WebButton();
         labelDelay = new javax.swing.JLabel();
         inputDelay = new javax.swing.JTextField();
-        radioButtonDijkstra1 = new javax.swing.JRadioButton();
+        radioButtonTraveling = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Caminho em Grafos");
@@ -179,9 +180,9 @@ public class MainWindow extends javax.swing.JFrame {
         inputDelay.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         inputDelay.setText("300");
 
-        radioButtonAlgorithmGroup.add(radioButtonDijkstra1);
-        radioButtonDijkstra1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        radioButtonDijkstra1.setText("Caixeiro");
+        radioButtonAlgorithmGroup.add(radioButtonTraveling);
+        radioButtonTraveling.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        radioButtonTraveling.setText("Caixeiro");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -220,7 +221,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(radioButtonDijkstra)
                             .addComponent(radioButtonBFS)
                             .addComponent(radioButtonDFS)
-                            .addComponent(radioButtonDijkstra1))))
+                            .addComponent(radioButtonTraveling))))
                 .addContainerGap())
             .addComponent(graphPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1116, Short.MAX_VALUE)
         );
@@ -246,8 +247,8 @@ public class MainWindow extends javax.swing.JFrame {
                                             .addComponent(labelDelay)
                                             .addComponent(inputDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(radioButtonDijkstra1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE))
+                                .addComponent(radioButtonTraveling)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -256,8 +257,8 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(labelVerticeFinal)
-                                    .addComponent(comboBoxVerticeFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)))
+                                    .addComponent(comboBoxVerticeFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(botaoIniciarAStar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botaoImportarXML, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -346,7 +347,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioButtonBFS;
     private javax.swing.JRadioButton radioButtonDFS;
     private javax.swing.JRadioButton radioButtonDijkstra;
-    private javax.swing.JRadioButton radioButtonDijkstra1;
+    private javax.swing.JRadioButton radioButtonTraveling;
     private javax.swing.JTextArea textAreaPath;
     // End of variables declaration//GEN-END:variables
 
@@ -385,5 +386,9 @@ public class MainWindow extends javax.swing.JFrame {
 
     public JTextField getInputDelay() {
         return inputDelay;
+    }
+
+    public JRadioButton getRadioButtonTraveling() {
+        return radioButtonTraveling;
     }
 }

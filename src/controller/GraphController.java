@@ -62,7 +62,7 @@ public class GraphController {
         Point v2;
         for (int i = 0; i < matriz[0].length; i++) {
             for (int j = 0; j < matriz.length; j++) {
-                if(matriz[i][j] != 0){
+                if((!this.grafo.isPonderado() && matriz[i][j] != 0) || (this.grafo.isPonderado() && matriz[i][j] > -1)){
                     v1 = this.grafo.getVertice(i).getPosicao();
                     v2 = this.grafo.getVertice(j).getPosicao();
                     g.drawLine(v1.x, v1.y, v2.x, v2.y);
@@ -75,6 +75,7 @@ public class GraphController {
                 }
             }
         }
+
         if(this.grafo.getCaminho() != null && this.grafo.getCaminho().size() > 1){
             for (int i = 0; i < this.grafo.getCaminho().size() - 1; i++) {
                 g.setColor(Color.red);

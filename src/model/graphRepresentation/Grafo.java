@@ -8,11 +8,12 @@ package model.graphRepresentation;
 import controller.WindowController;
 import java.awt.Point;
 import java.util.ArrayList;
-import model.graphAlgorithm.AlgoritmoBuscaCaminho;
-import model.graphAlgorithm.BreadthFirstSearch;
+import model.graphAlgorithm.BuscaCaminhoGrafo.AlgoritmoBuscaCaminho;
+import model.graphAlgorithm.BuscaCaminhoGrafo.BreadthFirstSearch;
 import model.graphAlgorithm.Coloracao;
-import model.graphAlgorithm.DepthFirstSearch;
-import model.graphAlgorithm.DijkstraSearch;
+import model.graphAlgorithm.BuscaCaminhoGrafo.DepthFirstSearch;
+import model.graphAlgorithm.BuscaCaminhoGrafo.DijkstraSearch;
+import model.graphAlgorithm.BuscaCaminhoGrafo.TravelingSalesman;
 
 /**
  *
@@ -33,13 +34,24 @@ public class Grafo {
     private boolean threadExecucao = false;
     private WindowController controller;
     
-    public enum TipoBusca{DFS, BFS, DIJKSTRA}
+    public enum TipoBusca{DFS, BFS, DIJKSTRA, TSP}
     
     public Grafo(boolean ponderado, boolean dirigido, int numeroVertice, WindowController ctr) {
         this.ponderado = ponderado;
         this.dirigido = dirigido;
         matrizAdjacencia = new double[numeroVertice][numeroVertice];
+        if(this.ponderado){
+            this.prepararMatrizPonderada(numeroVertice);
+        }
         this.controller = ctr;
+    }
+    
+    private void prepararMatrizPonderada(int n){
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                this.matrizAdjacencia[i][j] = -1;
+            }
+        }
     }
     
     public void addVertice(Point point, int id, String rotulo){
@@ -94,6 +106,7 @@ public class Grafo {
                 }
             }
         }
+        this.limparCaminho();
         this.conexo = true;
         return this.conexo;
     }
@@ -114,7 +127,7 @@ public class Grafo {
     public ArrayList<Vertice> getVizinhosNaoVisitadosVertice(Vertice vertice){
         ArrayList<Vertice> verticeVizinho = new ArrayList<>();
         for (int i = 0; i < this.getNumeroVertices(); i++) {
-            if(this.matrizAdjacencia[vertice.getId()][i] > 0 && !this.arrayVertice.get(i).isVisitado()){
+            if((!this.ponderado && this.matrizAdjacencia[vertice.getId()][i] > 0 || (this.ponderado && this.matrizAdjacencia[vertice.getId()][i] > -1)) && !this.arrayVertice.get(i).isVisitado()){
                 verticeVizinho.add(this.arrayVertice.get(i));
             }
         }
@@ -124,7 +137,7 @@ public class Grafo {
     public ArrayList<Vertice> getVizinhosVertice(Vertice vertice){
         ArrayList<Vertice> verticeVizinho = new ArrayList<>();
         for (int i = 0; i < this.getNumeroVertices(); i++) {
-            if(this.matrizAdjacencia[vertice.getId()][i] > 0){
+            if((!this.ponderado && this.matrizAdjacencia[vertice.getId()][i] > 0 || (this.ponderado && this.matrizAdjacencia[vertice.getId()][i] > -1))){
                 verticeVizinho.add(this.arrayVertice.get(i));
             }
         }
@@ -197,6 +210,9 @@ public class Grafo {
                 
             case DIJKSTRA:
                 this.algoritmoBuscaCaminho = new DijkstraSearch(this);
+            break;
+            case TSP:
+                this.algoritmoBuscaCaminho = new TravelingSalesman(this);
             break;
         }
     }
