@@ -116,11 +116,11 @@ public class WindowController {
             return;
         }
         if(this.mainWindow.getRadioButtonDFS().isSelected()){
-            this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.DFS);
+            this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.DFS, 0);
         }else if(this.mainWindow.getRadioButtonBFS().isSelected()){
-            this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.BFS);
+            this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.BFS, 0);
         }else if(this.mainWindow.getRadioButtonDijkstra().isSelected()){
-            this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.DIJKSTRA);
+            this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.DIJKSTRA, 0);
         }else if(this.mainWindow.getRadioButtonTraveling().isSelected()){
             if(!this.grafoAtual.verificarGrafoConexo()){
                 this.mainWindow.getTextAreaPath().setText("Grafo não conexo! Não é possível executar o Caixeiro Viajante");
@@ -130,12 +130,48 @@ public class WindowController {
                 this.mainWindow.getTextAreaPath().setText("Grafo não é ponderado! Não é possível executar o Caixeiro Viajante");
                 return;
             }
-            this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.TSP);
+//            this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.TSP);
+            this.iniciarSalesman();
+            return;
         }else{
             return;
         }
         this.mainWindow.getTextAreaPath().setText("");
         ArrayList<Vertice> caminho = this.grafoAtual.realizarBusca(this.grafoAtual.getIdVerticePeloRotulo(rotuloA), this.grafoAtual.getIdVerticePeloRotulo(rotuloB));
+        this.finalizarBuscaCaminho(caminho);
+    }
+    
+    private void iniciarSalesman(){
+        int delay;
+        try{
+            delay = Integer.parseInt(this.mainWindow.getInputDelay().getText());
+            if(delay < 1 || delay > 9999){
+                delay = 300;
+            }
+        }catch(Exception e){
+            delay = 300;
+        }
+        this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.TSP, delay);
+        this.grafoAtual.realizarBusca(0, 0);
+        this.mainWindow.getTextAreaPath().setText("");
+    }
+    
+    public void pintarSalesman(double custoCaminho){
+        this.mainWindow.getTextAreaPath().setText("");
+        ArrayList<Vertice> caminho = this.grafoAtual.getCaminho();
+        for (int i = 0; i < caminho.size(); i++) {
+            this.mainWindow.getTextAreaPath().append(caminho.get(i).getRotulo());
+            if(i != caminho.size() - 1){
+                this.mainWindow.getTextAreaPath().append(" -> ");
+            }
+        }
+        this.mainWindow.getTextAreaPath().append("\nCusto total do caminho: " + custoCaminho);
+        this.graphController.desenharGrafo();
+    }
+    
+    public void finalizarSalesman(){
+        this.mainWindow.getTextAreaPath().setText("");
+        ArrayList<Vertice> caminho = this.grafoAtual.getCaminho();
         this.finalizarBuscaCaminho(caminho);
     }
     

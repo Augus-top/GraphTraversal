@@ -75,6 +75,10 @@ public class Grafo {
         return this.algoritmoBuscaCaminho.buscarCaminho(idVerticeA, idVerticeB);
     }
     
+    public void finalizarCaixeiro(){
+        this.controller.finalizarSalesman();
+    }
+    
     public boolean verificarTodosVerticesVisitados(){
         for (Vertice arrayVertice1 : arrayVertice) {
             if(!arrayVertice1.isVisitado()){
@@ -209,7 +213,7 @@ public class Grafo {
         this.conexo = conexo;
     }
 
-    public void setAlgoritmoBuscaCaminho(TipoBusca tipoBusca) {
+    public void setAlgoritmoBuscaCaminho(TipoBusca tipoBusca, int delay) {
         switch(tipoBusca){
             case DFS:
                 this.algoritmoBuscaCaminho = new DepthFirstSearch(this);
@@ -223,7 +227,7 @@ public class Grafo {
                 this.algoritmoBuscaCaminho = new DijkstraSearch(this);
             break;
             case TSP:
-                this.algoritmoBuscaCaminho = new TravelingSalesman(this);
+                this.algoritmoBuscaCaminho = new TravelingSalesman(this, delay);
             break;
         }
     }
