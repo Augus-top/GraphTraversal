@@ -41,6 +41,15 @@ public class TravelingSalesman extends AlgoritmoBuscaCaminho implements Runnable
         return null;
     }
     
+    private void requisitarPinturaSalesman(){
+        try {
+            this.grafo.getController().pintarSalesman(this.custoCaminho);
+            Thread.sleep(this.delay);
+        }catch (InterruptedException ex) {
+            Logger.getLogger(TravelingSalesman.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void encontrarSubCicloInicial(){
         int indice1 = 0;
         int indice2 = 0;
@@ -62,6 +71,8 @@ public class TravelingSalesman extends AlgoritmoBuscaCaminho implements Runnable
         this.custoCaminho = menorCusto * 2;
         this.grafo.getVertice(indice2).setCustoCaminho(menorCusto);
         this.grafo.getVertice(indice1).setCustoCaminho(menorCusto);
+        this.grafo.getVertice(indice1).setCorVertice(2);
+        this.grafo.getVertice(indice2).setCorVertice(2);
         this.grafo.getVertice(indice1).setVisitado(true);
         this.grafo.getVertice(indice2).setVisitado(true);
         this.caminhoGrafo.add(this.grafo.getVertice(indice1));
@@ -72,16 +83,11 @@ public class TravelingSalesman extends AlgoritmoBuscaCaminho implements Runnable
     public ArrayList<Vertice> buscarCaminhoMenorEncargo(){
         this.caminhoGrafo = new ArrayList<>();
         this.encontrarSubCicloInicial();
-        try {
-            this.grafo.getController().pintarSalesman(this.custoCaminho);
-            Thread.sleep(this.delay);
-        }catch (InterruptedException ex) {
-            Logger.getLogger(TravelingSalesman.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.requisitarPinturaSalesman();
         double custoCorrente;
         double novoCusto;
         int indice1 = 0;
-        int indice2 = 0;
+        int indice2 = -1;
         double[][] matrizGrafo = this.grafo.getMatrizAdjacencia();
         do{
             custoCorrente = Integer.MAX_VALUE;
@@ -95,7 +101,12 @@ public class TravelingSalesman extends AlgoritmoBuscaCaminho implements Runnable
                         if(custoCorrente > novoCusto){
                             custoCorrente = novoCusto;
                             indice1 = i;
-                            indice2 = v.getId();
+                            if(indice2 != v.getId()){
+                                indice2 = v.getId();
+                                v.setCorVertice(1);
+                                this.requisitarPinturaSalesman();
+                                v.setCorVertice(null);
+                            }
                         }
                     }
                 }
@@ -111,12 +122,8 @@ public class TravelingSalesman extends AlgoritmoBuscaCaminho implements Runnable
             verticeProximoCaminho.setCustoCaminho(matrizGrafo[indice2][verticeProximoCaminho.getId()]);
             this.caminhoGrafo.add(indice1 + 1, novoVerticeCaminho);
             this.custoCaminho += custoCorrente;
-            try {
-                this.grafo.getController().pintarSalesman(this.custoCaminho);
-                Thread.sleep(this.delay);
-            }catch (InterruptedException ex) {
-                Logger.getLogger(TravelingSalesman.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            novoVerticeCaminho.setCorVertice(2);
+            this.requisitarPinturaSalesman();
         }while(!this.grafo.verificarTodosVerticesVisitados());
         this.caminhoGrafo.get(this.caminhoGrafo.size() - 1).setCustoCaminho(this.custoCaminho);
         return this.caminhoGrafo;

@@ -170,16 +170,19 @@ public class WindowController {
     }
     
     public void finalizarSalesman(){
-        this.mainWindow.getTextAreaPath().setText("");
+        this.mainWindow.getTextAreaPath().setText("Finalizado!\n\n");
         ArrayList<Vertice> caminho = this.grafoAtual.getCaminho();
         this.finalizarBuscaCaminho(caminho);
     }
     
     private void finalizarBuscaCaminho(ArrayList<Vertice> caminho){
         if(caminho == null){
+            
             if(this.mainWindow.getRadioButtonTraveling().isSelected()){
                 if(!this.grafoAtual.verificarGrafoCompleto()){
                     this.mainWindow.getTextAreaPath().setText("Falha na heurística pelo grafo não ser completo!");
+                    this.grafoAtual.limparCaminho();
+                    this.grafoAtual.limparColoracao();
                     return;
                 }else{
                     this.mainWindow.getTextAreaPath().append("Caminho Não Existe\n");
@@ -206,6 +209,7 @@ public class WindowController {
             this.definirGrafoConexo();
         }
         this.grafoAtual.limparCaminho();
+        this.grafoAtual.limparColoracao();
     }
     
     

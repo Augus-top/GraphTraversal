@@ -2,7 +2,7 @@
 <Grafo ponderado="true" dirigido="false">
 	<Vertices>
 		<!-- relId indica o índice do vértice na matriz de adjacências-->
-		<Vertice relId="0" rotulo="A" posX="8" posY="52"/>
+		<Vertice relId="0" rotulo="A" posX="22" posY="52"/>
 		<Vertice relId="1" rotulo="B" posX="214" posY="104"/>
 		<Vertice relId="2" rotulo="C" posX="57" posY="271"/>
 		<Vertice relId="3" rotulo="D" posX="314" posY="268"/>
