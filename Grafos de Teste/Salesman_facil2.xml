@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Grafo ponderado="true" dirigido="false">
+	<Vertices>
+		<!-- relId indica o índice do vértice na matriz de adjacências-->
+		<Vertice relId="0" rotulo="A" posX="258" posY="51"/>
+		<Vertice relId="1" rotulo="B" posX="133" posY="463"/>
+		<Vertice relId="2" rotulo="C" posX="588" posY="22"/>
+		<Vertice relId="3" rotulo="D" posX="781" posY="35"/>
+		<Vertice relId="4" rotulo="E" posX="531" posY="547"/>
+		<Vertice relId="5" rotulo="F" posX="380" posY="501"/>
+		<Vertice relId="6" rotulo="G" posX="421" posY="15"/>
+		<Vertice relId="7" rotulo="H" posX="954" posY="459"/>
+		<Vertice relId="8" rotulo="I" posX="133" posY="105"/>
+		<Vertice relId="9" rotulo="J" posX="48" posY="188"/>
+		<Vertice relId="10" rotulo="K" posX="849" posY="509"/>
+		<Vertice relId="11" rotulo="L" posX="231" posY="520"/>
+		<Vertice relId="12" rotulo="M" posX="916" posY="101"/>
+		<Vertice relId="13" rotulo="N" posX="1020" posY="206"/>
+		<Vertice relId="14" rotulo="O" posX="721" posY="539"/>
+		<Vertice relId="15" rotulo="P" posX="1020" posY="362"/>
+		<Vertice relId="16" rotulo="Q" posX="46" posY="362"/>
+	</Vertices>
+	<Arestas>
+		<Aresta idVertice1="0" idVertice2="8" peso="2.0"/>
+		<Aresta idVertice1="0" idVertice2="9" peso="2.0"/>
+		<Aresta idVertice1="0" idVertice2="16" peso="4.0"/>
+		<Aresta idVertice1="0" idVertice2="1" peso="5.0"/>
+		<Aresta idVertice1="0" idVertice2="11" peso="5.0"/>
+		<Aresta idVertice1="0" idVertice2="5" peso="12.0"/>
+		<Aresta idVertice1="0" idVertice2="4" peso="14.0"/>
+		<Aresta idVertice1="0" idVertice2="14" peso="15.0"/>
+		<Aresta idVertice1="0" idVertice2="10" peso="16.0"/>
+		<Aresta idVertice1="0" idVertice2="7" peso="11.0"/>
+		<Aresta idVertice1="0" idVertice2="13" peso="11.0"/>
+		<Aresta idVertice1="0" idVertice2="2" peso="14.0"/>
+		<Aresta idVertice1="1" idVertice2="11" peso="5.0"/>
+		<Aresta idVertice1="1" idVertice2="6" peso="3.0"/>
+		<Aresta idVertice1="1" idVertice2="5" peso="3.0"/>
+		<Aresta idVertice1="1" idVertice2="14" peso="5.0"/>
+		<Aresta idVertice1="1" idVertice2="15" peso="2.0"/>
+		<Aresta idVertice1="1" idVertice2="12" peso="3.0"/>
+		<Aresta idVertice1="2" idVertice2="6" peso="18.0"/>
+		<Aresta idVertice1="2" idVertice2="8" peso="20.0"/>
+		<Aresta idVertice1="2" idVertice2="9" peso="5.0"/>
+		<Aresta idVertice1="2" idVertice2="16" peso="4.0"/>
+		<Aresta idVertice1="2" idVertice2="1" peso="3.0"/>
+		<Aresta idVertice1="2" idVertice2="5" peso="2.0"/>
+		<Aresta idVertice1="2" idVertice2="14" peso="2.0"/>
+		<Aresta idVertice1="2" idVertice2="10" peso="7.0"/>
+		<Aresta idVertice1="2" idVertice2="15" peso="4.0"/>
+		<Aresta idVertice1="2" idVertice2="13" peso="3.0"/>
+		<Aresta idVertice1="3" idVertice2="2" peso="17.0"/>
+		<Aresta idVertice1="3" idVertice2="0" peso="15.0"/>
+		<Aresta idVertice1="3" idVertice2="8" peso="14.0"/>
+		<Aresta idVertice1="3" idVertice2="9" peso="5.0"/>
+		<Aresta idVertice1="3" idVertice2="16" peso="3.0"/>
+		<Aresta idVertice1="3" idVertice2="1" peso="4.0"/>
+		<Aresta idVertice1="3" idVertice2="11" peso="15.0"/>
+		<Aresta idVertice1="3" idVertice2="5" peso="12.0"/>
+		<Aresta idVertice1="3" idVertice2="14" peso="3.0"/>
+		<Aresta idVertice1="4" idVertice2="14" peso="4.0"/>
+		<Aresta idVertice1="4" idVertice2="8" peso="111.0"/>
+		<Aresta idVertice1="4" idVertice2="1" peso="4.0"/>
+		<Aresta idVertice1="4" idVertice2="10" peso="10.0"/>
+		<Aresta idVertice1="4" idVertice2="15" peso="1.0"/>
+		<Aresta idVertice1="4" idVertice2="3" peso="1.0"/>
+		<Aresta idVertice1="4" idVertice2="2" peso="1.0"/>
+		<Aresta idVertice1="4" idVertice2="6" peso="1.0"/>
+		<Aresta idVertice1="5" idVertice2="4" peso="2.0"/>
+		<Aresta idVertice1="5" idVertice2="16" peso="2.0"/>
+		<Aresta idVertice1="5" idVertice2="6" peso="4.0"/>
+		<Aresta idVertice1="5" idVertice2="14" peso="5.0"/>
+		<Aresta idVertice1="5" idVertice2="10" peso="6.0"/>
+		<Aresta idVertice1="5" idVertice2="15" peso="9.0"/>
+		<Aresta idVertice1="5" idVertice2="12" peso="15.0"/>
+		<Aresta idVertice1="6" idVertice2="0" peso="20.0"/>
+		<Aresta idVertice1="6" idVertice2="11" peso="1.0"/>
+		<Aresta idVertice1="6" idVertice2="13" peso="2.0"/>
+		<Aresta idVertice1="7" idVertice2="15" peso="13.0"/>
+		<Aresta idVertice1="7" idVertice2="8" peso="1.0"/>
+		<Aresta idVertice1="7" idVertice2="9" peso="2.0"/>
+		<Aresta idVertice1="7" idVertice2="16" peso="3.0"/>
+		<Aresta idVertice1="7" idVertice2="1" peso="1.0"/>
+		<Aresta idVertice1="7" idVertice2="11" peso="6.0"/>
+		<Aresta idVertice1="7" idVertice2="5" peso="8.0"/>
+		<Aresta idVertice1="7" idVertice2="4" peso="2.0"/>
+		<Aresta idVertice1="7" idVertice2="13" peso="22.0"/>
+		<Aresta idVertice1="7" idVertice2="3" peso="4.0"/>
+		<Aresta idVertice1="7" idVertice2="2" peso="1.0"/>
+		<Aresta idVertice1="7" idVertice2="6" peso="2.0"/>
+		<Aresta idVertice1="8" idVertice2="9" peso="3.0"/>
+		<Aresta idVertice1="8" idVertice2="6" peso="2.0"/>
+		<Aresta idVertice1="8" idVertice2="16" peso="3.0"/>
+		<Aresta idVertice1="8" idVertice2="1" peso="22.0"/>
+		<Aresta idVertice1="8" idVertice2="5" peso="11.0"/>
+		<Aresta idVertice1="8" idVertice2="14" peso="15.0"/>
+		<Aresta idVertice1="9" idVertice2="16" peso="4.0"/>
+		<Aresta idVertice1="9" idVertice2="6" peso="11.0"/>
+		<Aresta idVertice1="9" idVertice2="1" peso="1.0"/>
+		<Aresta idVertice1="9" idVertice2="5" peso="3.0"/>
+		<Aresta idVertice1="9" idVertice2="4" peso="4.0"/>
+		<Aresta idVertice1="9" idVertice2="10" peso="11.0"/>
+		<Aresta idVertice1="9" idVertice2="15" peso="3.0"/>
+		<Aresta idVertice1="9" idVertice2="12" peso="5.0"/>
+		<Aresta idVertice1="10" idVertice2="7" peso="12.0"/>
+		<Aresta idVertice1="10" idVertice2="8" peso="1.0"/>
+		<Aresta idVertice1="10" idVertice2="1" peso="6.0"/>
+		<Aresta idVertice1="10" idVertice2="15" peso="4.0"/>
+		<Aresta idVertice1="10" idVertice2="12" peso="6.0"/>
+		<Aresta idVertice1="10" idVertice2="3" peso="6.0"/>
+		<Aresta idVertice1="10" idVertice2="6" peso="1.0"/>
+		<Aresta idVertice1="11" idVertice2="5" peso="2.0"/>
+		<Aresta idVertice1="11" idVertice2="8" peso="1.0"/>
+		<Aresta idVertice1="11" idVertice2="9" peso="2.0"/>
+		<Aresta idVertice1="11" idVertice2="2" peso="2.0"/>
+		<Aresta idVertice1="11" idVertice2="4" peso="3.0"/>
+		<Aresta idVertice1="11" idVertice2="10" peso="5.0"/>
+		<Aresta idVertice1="11" idVertice2="15" peso="8.0"/>
+		<Aresta idVertice1="12" idVertice2="3" peso="16.0"/>
+		<Aresta idVertice1="12" idVertice2="0" peso="12.0"/>
+		<Aresta idVertice1="12" idVertice2="8" peso="15.0"/>
+		<Aresta idVertice1="12" idVertice2="16" peso="6.0"/>
+		<Aresta idVertice1="12" idVertice2="11" peso="10.0"/>
+		<Aresta idVertice1="12" idVertice2="4" peso="1.0"/>
+		<Aresta idVertice1="12" idVertice2="14" peso="7.0"/>
+		<Aresta idVertice1="12" idVertice2="7" peso="33.0"/>
+		<Aresta idVertice1="12" idVertice2="2" peso="3.0"/>
+		<Aresta idVertice1="12" idVertice2="6" peso="2.0"/>
+		<Aresta idVertice1="13" idVertice2="12" peso="15.0"/>
+		<Aresta idVertice1="13" idVertice2="8" peso="12.0"/>
+		<Aresta idVertice1="13" idVertice2="9" peso="4.0"/>
+		<Aresta idVertice1="13" idVertice2="16" peso="5.0"/>
+		<Aresta idVertice1="13" idVertice2="1" peso="2.0"/>
+		<Aresta idVertice1="13" idVertice2="11" peso="9.0"/>
+		<Aresta idVertice1="13" idVertice2="5" peso="10.0"/>
+		<Aresta idVertice1="13" idVertice2="4" peso="1.0"/>
+		<Aresta idVertice1="13" idVertice2="10" peso="5.0"/>
+		<Aresta idVertice1="13" idVertice2="3" peso="4.0"/>
+		<Aresta idVertice1="14" idVertice2="10" peso="11.0"/>
+		<Aresta idVertice1="14" idVertice2="9" peso="5.0"/>
+		<Aresta idVertice1="14" idVertice2="16" peso="2.0"/>
+		<Aresta idVertice1="14" idVertice2="11" peso="4.0"/>
+		<Aresta idVertice1="14" idVertice2="6" peso="1.0"/>
+		<Aresta idVertice1="14" idVertice2="7" peso="4.0"/>
+		<Aresta idVertice1="14" idVertice2="13" peso="6.0"/>
+		<Aresta idVertice1="15" idVertice2="13" peso="14.0"/>
+		<Aresta idVertice1="15" idVertice2="0" peso="11.0"/>
+		<Aresta idVertice1="15" idVertice2="8" peso="111.0"/>
+		<Aresta idVertice1="15" idVertice2="16" peso="4.0"/>
+		<Aresta idVertice1="15" idVertice2="14" peso="5.0"/>
+		<Aresta idVertice1="15" idVertice2="12" peso="2.0"/>
+		<Aresta idVertice1="15" idVertice2="3" peso="3.0"/>
+		<Aresta idVertice1="15" idVertice2="6" peso="5.0"/>
+		<Aresta idVertice1="16" idVertice2="1" peso="5.0"/>
+		<Aresta idVertice1="16" idVertice2="6" peso="4.0"/>
+		<Aresta idVertice1="16" idVertice2="11" peso="3.0"/>
+		<Aresta idVertice1="16" idVertice2="4" peso="1.0"/>
+		<Aresta idVertice1="16" idVertice2="10" peso="3.0"/>
+	</Arestas>
+</Grafo>

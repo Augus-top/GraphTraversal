@@ -52,9 +52,6 @@ public class TravelingSalesman extends AlgoritmoBuscaCaminho{
     public ArrayList<Vertice> buscarCaminho(int idVerticeA, int idVerticeB) {
         this.caminhoGrafo = new ArrayList<>();
         this.encontrarSubCicloInicial();
-//        for (Vertice caminhoGrafo1 : caminhoGrafo) {
-//            System.out.println(caminhoGrafo1.getRotulo());
-//        }
         double custoCorrente;
         double novoCusto;
         int indice1 = 0;
@@ -69,7 +66,6 @@ public class TravelingSalesman extends AlgoritmoBuscaCaminho{
                     }
                     else if(matrizGrafo[this.caminhoGrafo.get(i).getId()][v.getId()] > -1 && matrizGrafo[v.getId()][this.caminhoGrafo.get(i + 1).getId()] > -1){
                         novoCusto = matrizGrafo[this.caminhoGrafo.get(i).getId()][v.getId()] + matrizGrafo[v.getId()][this.caminhoGrafo.get(i + 1).getId()] - this.caminhoGrafo.get(i + 1).getCustoCaminho();
-//                        System.out.println(v.getRotulo() + " - " + novoCusto);
                         if(custoCorrente > novoCusto){
                             custoCorrente = novoCusto;
                             indice1 = i;
@@ -79,9 +75,6 @@ public class TravelingSalesman extends AlgoritmoBuscaCaminho{
                 }
             }
             if(custoCorrente == Integer.MAX_VALUE){
-//                for (Vertice v : this.caminhoGrafo) {
-//                    System.out.print(v.getRotulo() + " -> ");
-//                }
                 this.caminhoGrafo = null;
                 return this.caminhoGrafo;
             }
@@ -92,12 +85,6 @@ public class TravelingSalesman extends AlgoritmoBuscaCaminho{
             verticeProximoCaminho.setCustoCaminho(matrizGrafo[indice2][verticeProximoCaminho.getId()]);
             this.caminhoGrafo.add(indice1 + 1, novoVerticeCaminho);
             this.custoCaminho += custoCorrente;
-//            System.out.println(this.custoCaminho);
-//            System.out.println(novoVerticeCaminho.getRotulo());
-//            for (Vertice v : this.caminhoGrafo) {
-//                System.out.print(v.getRotulo() + " -> ");
-//            }
-//            break;
         }while(!this.grafo.verificarTodosVerticesVisitados());
         this.caminhoGrafo.get(this.caminhoGrafo.size() - 1).setCustoCaminho(this.custoCaminho);
         return this.caminhoGrafo;

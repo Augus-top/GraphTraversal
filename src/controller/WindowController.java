@@ -129,9 +129,6 @@ public class WindowController {
             }else if(!this.grafoAtual.isPonderado()){
                 this.mainWindow.getTextAreaPath().setText("Grafo não é ponderado! Não é possível executar o Caixeiro Viajante");
                 return;
-            }else if(this.grafoAtual.isDirigido()){
-                this.mainWindow.getTextAreaPath().setText("Grafo é dirigido! Não é possível executar o Caixeiro Viajante");
-                return;
             }
             this.grafoAtual.setAlgoritmoBuscaCaminho(Grafo.TipoBusca.TSP);
         }else{
