@@ -8,7 +8,6 @@ package model.graphAlgorithm.BuscaCaminhoGrafo;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.graphAlgorithm.Coloracao;
 import model.graphRepresentation.Grafo;
 import model.graphRepresentation.Vertice;
 
@@ -83,6 +82,12 @@ public class TravelingSalesman extends AlgoritmoBuscaCaminho implements Runnable
     public ArrayList<Vertice> buscarCaminhoMenorEncargo(){
         this.caminhoGrafo = new ArrayList<>();
         this.encontrarSubCicloInicial();
+        if(this.caminhoGrafo.get(0).getId() == this.caminhoGrafo.get(1).getId()){
+            this.caminhoGrafo.clear();
+            this.grafo.limparCaminho();
+            this.grafo.limparColoracao();
+            return this.greedySearchOriented();
+        }
         this.requisitarPinturaSalesman();
         double custoCorrente;
         double novoCusto;
@@ -126,6 +131,50 @@ public class TravelingSalesman extends AlgoritmoBuscaCaminho implements Runnable
             this.requisitarPinturaSalesman();
         }while(!this.grafo.verificarTodosVerticesVisitados());
         this.caminhoGrafo.get(this.caminhoGrafo.size() - 1).setCustoCaminho(this.custoCaminho);
+        return this.caminhoGrafo;
+    }
+    
+    private ArrayList<Vertice> greedySearchOriented(){
+        this.custoCaminho = 0;
+        Vertice v = this.grafo.getArrayVertice().get(0);
+        v.setVisitado(true);
+        v.setCorVertice(2);
+        Vertice novoVertice;
+        double custoAtual;
+        this.caminhoGrafo.add(v);
+        this.requisitarPinturaSalesman();
+        ArrayList<Vertice> vizinhos;
+        double[][] matrizGrafo = this.grafo.getMatrizAdjacencia();
+        do {            
+            vizinhos = this.grafo.getVizinhosNaoVisitadosVertice(v);
+            novoVertice = null;
+            custoAtual = Integer.MAX_VALUE;
+            for (Vertice vizinho : vizinhos) {
+                if(custoAtual > matrizGrafo[v.getId()][vizinho.getId()]){
+                    custoAtual = matrizGrafo[v.getId()][vizinho.getId()];
+                    novoVertice = vizinho;
+                }
+            }
+            if(novoVertice == null){
+                this.caminhoGrafo = null;
+                return this.caminhoGrafo;
+            }
+            novoVertice.setVisitado(true);
+            novoVertice.setCorVertice(2);
+            this.custoCaminho += matrizGrafo[v.getId()][novoVertice.getId()];
+            this.caminhoGrafo.add(novoVertice);
+            v = novoVertice;
+            this.requisitarPinturaSalesman();
+        } while (!this.grafo.verificarTodosVerticesVisitados());
+        Vertice first = this.caminhoGrafo.get(0);
+        Vertice last = this.caminhoGrafo.get(this.caminhoGrafo.size() - 1);
+        if(matrizGrafo[last.getId()][first.getId()] == -1){
+            this.caminhoGrafo = null;
+            return this.caminhoGrafo;
+        }
+        this.custoCaminho += matrizGrafo[last.getId()][first.getId()];
+        this.caminhoGrafo.get(0).setCustoCaminho(this.custoCaminho);
+        this.caminhoGrafo.add(this.caminhoGrafo.get(0));
         return this.caminhoGrafo;
     }
 }
