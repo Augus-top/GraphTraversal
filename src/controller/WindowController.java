@@ -144,7 +144,16 @@ public class WindowController {
     
     private void finalizarBuscaCaminho(ArrayList<Vertice> caminho){
         if(caminho == null){
-            this.mainWindow.getTextAreaPath().append("Caminho Não Existe\n");
+            if(this.mainWindow.getRadioButtonTraveling().isSelected()){
+                if(!this.grafoAtual.verificarGrafoCompleto()){
+                    this.mainWindow.getTextAreaPath().setText("Falha na heurística pelo grafo não ser completo!");
+                    return;
+                }else{
+                    this.mainWindow.getTextAreaPath().append("Caminho Não Existe\n");
+                }
+            }else{
+                this.mainWindow.getTextAreaPath().append("Caminho Não Existe\n");
+            }
         }else{
             for (int i = 0; i < caminho.size(); i++) {
                 this.mainWindow.getTextAreaPath().append(caminho.get(i).getRotulo());

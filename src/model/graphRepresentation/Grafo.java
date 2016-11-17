@@ -149,6 +149,17 @@ public class Grafo {
         t.start();
     }
     
+    public boolean verificarGrafoCompleto(){
+        for (int i = 0; i < this.getNumeroVertices(); i++) {
+            for (int j = 0; j < this.getNumeroVertices(); j++) {
+                if(i != j && (!this.ponderado && this.matrizAdjacencia[i][j] == 0 || this.ponderado && this.matrizAdjacencia[i][j] == -1)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
     public void finalizarColoracao(int numeroCromatico){
         this.controller.terminarColoracao(numeroCromatico);
     }
